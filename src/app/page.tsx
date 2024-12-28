@@ -1,95 +1,62 @@
+import { projectListMock } from "@/mocks";
 import Image from "next/image";
+import Link from "next/link";
+import { GoArrowUpRight } from "react-icons/go";
+import { PiGithubLogoLight, PiInstagramLogoLight } from "react-icons/pi";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
+    <div className={styles["wrapper"]}>
+      <main className={styles["container"]}>
+        <header className={styles["header"]}>
+          <div className={styles["header-left"]}>
+            <h2 className={styles["header-left-pretitle"]}>my finished</h2>
+            <h1 className={styles["header-left-title"]}>projects</h1>
+          </div>
+          <div className={styles["header-right"]}>
+            <div className={styles["header-right-icon-box"]}>
+              <Link href="https://github.com/junhyeokshin" className={styles["header-right-icon"]}>
+                <PiGithubLogoLight />
+              </Link>
+              <Link href="https://instagram.com/junhyeok_shin" className={styles["header-right-icon"]}>
+                <PiInstagramLogoLight />
+              </Link>
+            </div>
+            <div className={styles["header-right-email"]}>junhyeok001010@gmail.com</div>
+          </div>
+        </header>
+        <section className={styles["content"]}>
+          {projectListMock.map((projectListItem) => (
+            <Link
+              key={projectListItem.id}
+              href={`/project/${projectListItem.id}`}
+              className={styles["project-container"]}
+              style={{ background: `${projectListItem.themeColor}`, textDecoration: "none" }}
+            >
+              <div className={styles["project-info-box"]}>
+                <Image
+                  src={projectListItem.titleImage ? projectListItem.titleImage : ""}
+                  alt={projectListItem.title}
+                  width={1600}
+                  height={1200}
+                  className={styles["project-title-image"]}
+                />
+                <div className={styles["project-info"]}>
+                  <h2 className={styles["project-title"]}>{projectListItem.title}</h2>
+                  <p className={styles["project-description"]}>{projectListItem.description}</p>
+                </div>
+              </div>
+              <div className={styles["project-button-container"]}>
+                <button className="button-white">
+                  <p className="button-text-white">view project</p>
+                  <GoArrowUpRight className="button-icon" />
+                </button>
+              </div>
+            </Link>
+          ))}
+        </section>
       </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
