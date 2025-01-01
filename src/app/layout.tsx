@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
+import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+
+const JetBrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+});
 
 const HelveticaNeueCyr = localFont({
   src: [
@@ -39,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${HelveticaNeueCyr.variable} ${Pretendard.variable}`}>{children}</body>
+      <body className={`${JetBrainsMono.variable} ${HelveticaNeueCyr.variable} ${Pretendard.variable}`}>{children}</body>
     </html>
   );
 }

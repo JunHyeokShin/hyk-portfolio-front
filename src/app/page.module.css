@@ -221,7 +221,7 @@
 
 @media screen and (max-width: 35em) {
   .wrapper {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
   .container {
@@ -239,6 +239,6 @@
   }
 
   .content {
-    gap: 1.5rem;
+    gap: 1rem;
   }
 }
