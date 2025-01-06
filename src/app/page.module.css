@@ -41,7 +41,7 @@
 
 .header-right-icon-box {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 0.5rem;
 }
 

@@ -3,11 +3,6 @@ import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
-const JetBrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-});
-
 const HelveticaNeueCyr = localFont({
   src: [
     { path: "../../public/fonts/HelveticaNeueCyr-Thin.ttf", weight: "100" },
@@ -26,11 +21,21 @@ const HelveticaNeueCyr = localFont({
   variable: "--font-helvetica-neue-cyr",
 });
 
+const JetBrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+});
+
 const Pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
   display: "swap",
   weight: "45 920",
   variable: "--font-pretendard",
+});
+
+const SegoeUISymbol = localFont({
+  src: "../../public/fonts/SegoeUISymbol.ttf",
+  variable: "--font-segoe-ui-symbol",
 });
 
 export const metadata: Metadata = {
@@ -45,7 +50,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${JetBrainsMono.variable} ${HelveticaNeueCyr.variable} ${Pretendard.variable}`}>{children}</body>
+      <body className={`${HelveticaNeueCyr.variable} ${JetBrainsMono.variable} ${Pretendard.variable} ${SegoeUISymbol.variable}`}>{children}</body>
     </html>
   );
 }

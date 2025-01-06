@@ -2,10 +2,6 @@
   padding: 8rem;
 }
 
-.container {
-  word-wrap: break-word;
-}
-
 @media screen and (max-width: 110em) {
   .wrapper {
     padding: 6rem;

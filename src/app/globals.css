@@ -13,6 +13,8 @@
   margin: 0;
   padding: 0;
   border: 0;
+
+  -webkit-font-smoothing: antialiased;
 }
 
 body,
@@ -32,7 +34,7 @@ strong {
 }
 
 code {
-  font-family: var(--font-jetbrains-mono);
+  font-family: var(--font-jetbrains-mono), var(--font-pretendard);
 }
 
 button {

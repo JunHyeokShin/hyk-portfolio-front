@@ -89,8 +89,8 @@
 }
 
 .code {
-  padding: 0 0.1em;
   border-radius: 0.2em;
+  padding: 0 0.1em;
 
   background-color: var(--gray-light);
   color: var(--red);
@@ -99,8 +99,8 @@
 }
 
 .pre code {
-  padding: 0;
   border-radius: inherit;
+  padding: 0;
 
   background-color: inherit;
   color: inherit;
