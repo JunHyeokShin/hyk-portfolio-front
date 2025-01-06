@@ -3,6 +3,7 @@
 
   font-size: 1.877rem;
   font-weight: 300;
+  line-height: 110%;
   letter-spacing: -0.02em;
 }
 
@@ -11,6 +12,7 @@
 
   font-size: 7.95rem;
   font-weight: 300;
+  line-height: 110%;
   letter-spacing: -0.05em;
 }
 
@@ -19,6 +21,7 @@
 
   font-size: 4.914rem;
   font-weight: 300;
+  line-height: 110%;
   letter-spacing: -0.05em;
 }
 
@@ -27,6 +30,7 @@
 
   font-size: 3.863rem;
   font-weight: 300;
+  line-height: 110%;
   letter-spacing: -0.05em;
 }
 
@@ -35,6 +39,7 @@
 
   font-size: 3.037rem;
   font-weight: 300;
+  line-height: 110%;
   letter-spacing: -0.05em;
 }
 
@@ -43,6 +48,7 @@
 
   font-size: 2.387rem;
   font-weight: 300;
+  line-height: 110%;
   letter-spacing: -0.05em;
 }
 
@@ -51,6 +57,7 @@
 
   font-size: 1.877rem;
   font-weight: 300;
+  line-height: 110%;
   letter-spacing: -0.05em;
 }
 
@@ -65,13 +72,18 @@
   letter-spacing: -0.02em;
 }
 
+.ol .p,
+.ul .p {
+  line-height: 140%;
+}
+
 .li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   padding-left: 0.5rem;
 }
 
 .li * {
-  margin: 0.5rem 0;
+  margin: 1rem 0;
 }
 
 .hr {
@@ -126,7 +138,7 @@
 
 @media screen and (max-width: 110em) {
   .p {
-    margin-bottom: cacl(1.25rem * 0.875);
+    margin-bottom: calc(1.25rem * 0.875);
 
     font-size: calc(1.877rem * 0.875);
   }
@@ -176,12 +188,12 @@
   }
 
   .li {
-    margin-bottom: calc(0.5rem * 0.875);
+    margin-bottom: calc(1rem * 0.875);
     padding-left: calc(0.5rem * 0.875);
   }
 
   .li * {
-    margin: calc(0.5rem * 0.875) 0;
+    margin: calc(1rem * 0.875) 0;
   }
 
   .hr {
@@ -211,7 +223,7 @@
 
 @media screen and (max-width: 80em) {
   .p {
-    margin-bottom: cacl(1.25rem * 0.75);
+    margin-bottom: calc(1.25rem * 0.75);
 
     font-size: calc(1.877rem * 0.75);
   }
@@ -261,12 +273,12 @@
   }
 
   .li {
-    margin-bottom: calc(0.5rem * 0.75);
+    margin-bottom: calc(1rem * 0.75);
     padding-left: calc(0.5rem * 0.75);
   }
 
   .li * {
-    margin: calc(0.5rem * 0.75) 0;
+    margin: calc(1rem * 0.75) 0;
   }
 
   .hr {
@@ -296,7 +308,7 @@
 
 @media screen and (max-width: 50em) {
   .p {
-    margin-bottom: cacl(1.25rem * 0.625);
+    margin-bottom: calc(1.25rem * 0.625);
 
     font-size: calc(1.877rem * 0.625);
   }
@@ -346,12 +358,12 @@
   }
 
   .li {
-    margin-bottom: calc(0.5rem * 0.625);
+    margin-bottom: calc(1rem * 0.625);
     padding-left: calc(0.5rem * 0.625);
   }
 
   .li * {
-    margin: calc(0.5rem * 0.625) 0;
+    margin: calc(1rem * 0.625) 0;
   }
 
   .hr {
@@ -381,7 +393,7 @@
 
 @media screen and (max-width: 35em) {
   .p {
-    margin-bottom: cacl(1.25rem * 0.5625);
+    margin-bottom: calc(1.25rem * 0.5625);
 
     font-size: calc(1.877rem * 0.5625);
   }
@@ -431,12 +443,12 @@
   }
 
   .li {
-    margin-bottom: calc(0.5rem * 0.5625);
+    margin-bottom: calc(1rem * 0.5625);
     padding-left: calc(0.5rem * 0.5625);
   }
 
   .li * {
-    margin: calc(0.5rem * 0.5625) 0;
+    margin: calc(1rem * 0.5625) 0;
   }
 
   .hr {
