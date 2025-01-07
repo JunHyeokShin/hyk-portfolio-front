@@ -4,11 +4,11 @@
   font-size: 1.877rem;
   font-weight: 300;
   line-height: 110%;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .h1 {
-  margin-bottom: 1.25rem;
+  margin: -2.5rem 0 2.5rem -2.5rem;
 
   font-size: 7.95rem;
   font-weight: 300;
@@ -17,7 +17,7 @@
 }
 
 .h2 {
-  margin: 3rem 0 1.25rem 0;
+  margin: 3rem 0 1.25rem -2rem;
 
   font-size: 4.914rem;
   font-weight: 300;
@@ -69,7 +69,7 @@
   font-size: 1.877rem;
   font-weight: 300;
   line-height: 120%;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .ol .p,
@@ -108,7 +108,7 @@
 
   background-color: var(--gray-light);
   color: var(--red);
-  font-size: 0.8em;
+  font-size: 0.85em;
   line-height: 100%;
 }
 
@@ -121,7 +121,7 @@
   font-size: 1.476rem;
   font-weight: 300;
   line-height: inherit;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .img {
@@ -146,13 +146,13 @@
   }
 
   .h1 {
-    margin-bottom: calc(1.25rem * 0.875);
+    margin: calc(-2.5rem * 0.875) 0 calc(2.5rem * 0.875) calc(-2.5rem * 0.875);
 
     font-size: calc(7.95rem * 0.875);
   }
 
   .h2 {
-    margin: calc(3rem * 0.875) 0 calc(1.25rem * 0.875) 0;
+    margin: calc(3rem * 0.875) 0 calc(1.25rem * 0.875) calc(-2rem * 0.875);
 
     font-size: calc(4.914rem * 0.875);
   }
@@ -236,13 +236,13 @@
   }
 
   .h1 {
-    margin-bottom: calc(1.25rem * 0.75);
+    margin: calc(-2.5rem * 0.75) 0 calc(2.5rem * 0.75) calc(-2.5rem * 0.75);
 
     font-size: calc(7.95rem * 0.75);
   }
 
   .h2 {
-    margin: calc(3rem * 0.75) 0 calc(1.25rem * 0.75) 0;
+    margin: calc(3rem * 0.75) 0 calc(1.25rem * 0.75) calc(-2rem * 0.75);
 
     font-size: calc(4.914rem * 0.75);
   }
@@ -326,7 +326,7 @@
   }
 
   .h1 {
-    margin-bottom: calc(1.25rem * 0.625);
+    margin: 0 0 calc(2.5rem * 0.625) 0;
 
     font-size: calc(7.95rem * 0.625);
   }
@@ -416,7 +416,7 @@
   }
 
   .h1 {
-    margin-bottom: calc(1.25rem * 0.5625);
+    margin: 0 0 calc(2.5rem * 0.5625) 0;
 
     font-size: calc(7.95rem * 0.5625);
   }

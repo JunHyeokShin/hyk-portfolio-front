@@ -3,6 +3,7 @@
 }
 
 .mdx-container sup {
+  margin-left: 0.15em;
   vertical-align: top;
 
   font-size: 0.618em;
@@ -15,13 +16,15 @@
 }
 
 .data-footnote-backref {
-  vertical-align: top;
-
   color: var(--blue);
   font-size: 0.618em;
   line-height: 120%;
 
   text-decoration: none;
+}
+
+.data-footnote-backref sup {
+  vertical-align: baseline;
 }
 
 .mdx-container sup a:hover,
@@ -60,7 +63,7 @@
   font-size: 1.877rem;
   font-weight: 300;
   line-height: 120%;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .contains-task-list p {
