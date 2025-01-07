@@ -1,18 +1,46 @@
 .mdx-container {
   word-wrap: break-word;
-}
 
-.mdx-container sup {
-  margin-left: 0.15em;
-  vertical-align: top;
+  & sup {
+    margin-left: 0.15em;
+    vertical-align: top;
 
-  font-size: 0.618em;
-  line-height: 120%;
-}
+    font-size: 0.618em;
+    line-height: 120%;
 
-.mdx-container sup a {
-  color: var(--blue);
-  text-decoration: none;
+    & a {
+      color: var(--blue);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 0.05em;
+      }
+    }
+  }
+
+  & table {
+    margin-bottom: 1.25rem;
+    border-collapse: collapse;
+  }
+
+  & th,
+  & td {
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--gray);
+    padding: 0.25rem 0.5rem;
+
+    font-size: 1.877rem;
+    font-weight: 300;
+    line-height: 110%;
+  }
+
+  & th {
+    background-color: var(--gray-light);
+
+    font-weight: 500;
+  }
 }
 
 .data-footnote-backref {
@@ -21,39 +49,15 @@
   line-height: 120%;
 
   text-decoration: none;
-}
 
-.data-footnote-backref sup {
-  vertical-align: baseline;
-}
+  & sup {
+    vertical-align: baseline;
+  }
 
-.mdx-container sup a:hover,
-.data-footnote-backref:hover {
-  text-decoration: underline;
-  text-decoration-thickness: 0.05em;
-}
-
-.mdx-container table {
-  margin-bottom: 1.25rem;
-  border-collapse: collapse;
-}
-
-.mdx-container th,
-.mdx-container td {
-  border-width: 1px;
-  border-style: solid;
-  border-color: var(--gray);
-  padding: 0.25rem 0.5rem;
-
-  font-size: 1.877rem;
-  font-weight: 300;
-  line-height: 110%;
-}
-
-.mdx-container th {
-  background-color: var(--gray-light);
-
-  font-weight: 500;
+  &:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.05em;
+  }
 }
 
 .contains-task-list {
@@ -64,50 +68,50 @@
   font-weight: 300;
   line-height: 120%;
   letter-spacing: -0.01em;
-}
 
-.contains-task-list p {
-  margin: 1rem 0;
+  & p {
+    margin: 1rem 0;
 
-  line-height: 120%;
+    line-height: 120%;
+  }
 }
 
 .task-list-item {
   margin-bottom: 1rem;
   padding-left: 0.5rem;
-}
 
-.task-list-item * {
-  margin: 1rem 0;
-}
+  & * {
+    margin: 1rem 0;
+  }
 
-.task-list-item input[type="checkbox"] {
-  margin: 0;
-  border-width: 1px;
-  border-style: solid;
-  border-color: var(--gray);
-  border-radius: 25%;
+  & input[type="checkbox"] {
+    margin: 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--gray);
+    border-radius: 25%;
 
-  position: relative;
-  vertical-align: top;
-  top: 0.7512rem;
+    position: relative;
+    vertical-align: top;
+    top: 0.7512rem;
 
-  appearance: none;
-  width: 0.75rem;
-  height: 0.75rem;
+    appearance: none;
+    width: 0.75rem;
+    height: 0.75rem;
 
-  background-color: inherit;
-}
+    background-color: inherit;
 
-.task-list-item input[type="checkbox"]:checked::before {
-  position: absolute;
-  transform: translate(-15%, -60%);
+    &:checked::before {
+      position: absolute;
+      transform: translate(-15%, -60%);
 
-  color: var(--gray-dark);
-  font-family: var(--font-segoe-ui-symbol);
-  font-size: 1.5rem;
+      color: var(--gray-dark);
+      font-family: var(--font-segoe-ui-symbol);
+      font-size: 1.5rem;
 
-  content: "✔";
+      content: "✔";
+    }
+  }
 }
 
 .sr-only {
@@ -120,15 +124,17 @@
 }
 
 @media screen and (max-width: 110em) {
-  .mdx-container table {
-    margin-bottom: calc(1.25rem * 0.875);
-  }
+  .mdx-container {
+    & table {
+      margin-bottom: calc(1.25rem * 0.875);
+    }
 
-  .mdx-container th,
-  .mdx-container td {
-    padding: calc(0.25rem * 0.875) calc(0.5rem * 0.875);
+    & th,
+    & td {
+      padding: calc(0.25rem * 0.875) calc(0.5rem * 0.875);
 
-    font-size: calc(1.877rem * 0.875);
+      font-size: calc(1.877rem * 0.875);
+    }
   }
 
   .contains-task-list {
@@ -136,30 +142,30 @@
     padding-left: calc(2.5rem * 0.875);
 
     font-size: calc(1.877rem * 0.875);
-  }
 
-  .contains-task-list p {
-    margin: calc(1rem * 0.875) 0;
+    & p {
+      margin: calc(1rem * 0.875) 0;
+    }
   }
 
   .task-list-item {
     margin-bottom: calc(1rem * 0.875);
     padding-left: calc(0.5rem * 0.875);
-  }
 
-  .task-list-item * {
-    margin: calc(1rem * 0.875) 0;
-  }
+    & * {
+      margin: calc(1rem * 0.875) 0;
+    }
 
-  .task-list-item input[type="checkbox"] {
-    top: calc(0.7512rem * 0.875);
+    & input[type="checkbox"] {
+      top: calc(0.7512rem * 0.875);
 
-    width: calc(0.75rem * 0.875);
-    height: calc(0.75rem * 0.875);
-  }
+      width: calc(0.75rem * 0.875);
+      height: calc(0.75rem * 0.875);
 
-  .task-list-item input[type="checkbox"]:checked::before {
-    font-size: calc(1.5rem * 0.875);
+      &:checked::before {
+        font-size: calc(1.5rem * 0.875);
+      }
+    }
   }
 
   .sr-only {
@@ -170,15 +176,17 @@
 }
 
 @media screen and (max-width: 80em) {
-  .mdx-container table {
-    margin-bottom: calc(1.25rem * 0.75);
-  }
+  .mdx-container {
+    & table {
+      margin-bottom: calc(1.25rem * 0.75);
+    }
 
-  .mdx-container th,
-  .mdx-container td {
-    padding: calc(0.25rem * 0.75) calc(0.5rem * 0.75);
+    & th,
+    & td {
+      padding: calc(0.25rem * 0.75) calc(0.5rem * 0.75);
 
-    font-size: calc(1.877rem * 0.75);
+      font-size: calc(1.877rem * 0.75);
+    }
   }
 
   .contains-task-list {
@@ -186,30 +194,30 @@
     padding-left: calc(2.5rem * 0.75);
 
     font-size: calc(1.877rem * 0.75);
-  }
 
-  .contains-task-list p {
-    margin: calc(1rem * 0.75) 0;
+    & p {
+      margin: calc(1rem * 0.75) 0;
+    }
   }
 
   .task-list-item {
     margin-bottom: calc(1rem * 0.75);
     padding-left: calc(0.5rem * 0.75);
-  }
 
-  .task-list-item * {
-    margin: calc(1rem * 0.75) 0;
-  }
+    & * {
+      margin: calc(1rem * 0.75) 0;
+    }
 
-  .task-list-item input[type="checkbox"] {
-    top: calc(0.7512rem * 0.75);
+    & input[type="checkbox"] {
+      top: calc(0.7512rem * 0.75);
 
-    width: calc(0.75rem * 0.75);
-    height: calc(0.75rem * 0.75);
-  }
+      width: calc(0.75rem * 0.75);
+      height: calc(0.75rem * 0.75);
 
-  .task-list-item input[type="checkbox"]:checked::before {
-    font-size: calc(1.5rem * 0.75);
+      &:checked::before {
+        font-size: calc(1.5rem * 0.75);
+      }
+    }
   }
 
   .sr-only {
@@ -220,15 +228,17 @@
 }
 
 @media screen and (max-width: 50em) {
-  .mdx-container table {
-    margin-bottom: calc(1.25rem * 0.625);
-  }
+  .mdx-container {
+    & table {
+      margin-bottom: calc(1.25rem * 0.625);
+    }
 
-  .mdx-container th,
-  .mdx-container td {
-    padding: calc(0.25rem * 0.625) calc(0.5rem * 0.625);
+    & th,
+    & td {
+      padding: calc(0.25rem * 0.625) calc(0.5rem * 0.625);
 
-    font-size: calc(1.877rem * 0.625);
+      font-size: calc(1.877rem * 0.625);
+    }
   }
 
   .contains-task-list {
@@ -236,30 +246,30 @@
     padding-left: calc(2.5rem * 0.625);
 
     font-size: calc(1.877rem * 0.625);
-  }
 
-  .contains-task-list p {
-    margin: calc(1rem * 0.625) 0;
+    & p {
+      margin: calc(1rem * 0.625) 0;
+    }
   }
 
   .task-list-item {
     margin-bottom: calc(1rem * 0.625);
     padding-left: calc(0.5rem * 0.625);
-  }
 
-  .task-list-item * {
-    margin: calc(1rem * 0.625) 0;
-  }
+    & * {
+      margin: calc(1rem * 0.625) 0;
+    }
 
-  .task-list-item input[type="checkbox"] {
-    top: calc(0.7512rem * 0.625);
+    & input[type="checkbox"] {
+      top: calc(0.7512rem * 0.625);
 
-    width: calc(0.75rem * 0.625);
-    height: calc(0.75rem * 0.625);
-  }
+      width: calc(0.75rem * 0.625);
+      height: calc(0.75rem * 0.625);
 
-  .task-list-item input[type="checkbox"]:checked::before {
-    font-size: calc(1.5rem * 0.625);
+      &:checked::before {
+        font-size: calc(1.5rem * 0.625);
+      }
+    }
   }
 
   .sr-only {
@@ -270,15 +280,17 @@
 }
 
 @media screen and (max-width: 35em) {
-  .mdx-container table {
-    margin-bottom: calc(1.25rem * 0.5625);
-  }
+  .mdx-container {
+    & table {
+      margin-bottom: calc(1.25rem * 0.5625);
+    }
 
-  .mdx-container th,
-  .mdx-container td {
-    padding: calc(0.25rem * 0.5625) calc(0.5rem * 0.5625);
+    & th,
+    & td {
+      padding: calc(0.25rem * 0.5625) calc(0.5rem * 0.5625);
 
-    font-size: calc(1.877rem * 0.5625);
+      font-size: calc(1.877rem * 0.5625);
+    }
   }
 
   .contains-task-list {
@@ -286,30 +298,30 @@
     padding-left: calc(2.5rem * 0.5625);
 
     font-size: calc(1.877rem * 0.5625);
-  }
 
-  .contains-task-list p {
-    margin: calc(1rem * 0.5625) 0;
+    & p {
+      margin: calc(1rem * 0.5625) 0;
+    }
   }
 
   .task-list-item {
     margin-bottom: calc(1rem * 0.5625);
     padding-left: calc(0.5rem * 0.5625);
-  }
 
-  .task-list-item * {
-    margin: calc(1rem * 0.5625) 0;
-  }
+    & * {
+      margin: calc(1rem * 0.5625) 0;
+    }
 
-  .task-list-item input[type="checkbox"] {
-    top: calc(0.7512rem * 0.5625);
+    & input[type="checkbox"] {
+      top: calc(0.7512rem * 0.5625);
 
-    width: calc(0.75rem * 0.5625);
-    height: calc(0.75rem * 0.5625);
-  }
+      width: calc(0.75rem * 0.5625);
+      height: calc(0.75rem * 0.5625);
 
-  .task-list-item input[type="checkbox"]:checked::before {
-    font-size: calc(1.5rem * 0.5625);
+      &:checked::before {
+        font-size: calc(1.5rem * 0.5625);
+      }
+    }
   }
 
   .sr-only {
