@@ -59,8 +59,14 @@
 
   font-size: 1.877rem;
   font-weight: 300;
-  line-height: 140%;
+  line-height: 120%;
   letter-spacing: -0.02em;
+}
+
+.contains-task-list p {
+  margin: 1rem 0;
+
+  line-height: 120%;
 }
 
 .task-list-item {
@@ -81,7 +87,7 @@
 
   position: relative;
   vertical-align: top;
-  top: 0.9389rem;
+  top: 0.7512rem;
 
   appearance: none;
   width: 0.75rem;
@@ -129,6 +135,10 @@
     font-size: calc(1.877rem * 0.875);
   }
 
+  .contains-task-list p {
+    margin: calc(1rem * 0.875) 0;
+  }
+
   .task-list-item {
     margin-bottom: calc(1rem * 0.875);
     padding-left: calc(0.5rem * 0.875);
@@ -139,7 +149,7 @@
   }
 
   .task-list-item input[type="checkbox"] {
-    top: calc(0.9389rem * 0.875);
+    top: calc(0.7512rem * 0.875);
 
     width: calc(0.75rem * 0.875);
     height: calc(0.75rem * 0.875);
@@ -175,6 +185,10 @@
     font-size: calc(1.877rem * 0.75);
   }
 
+  .contains-task-list p {
+    margin: calc(1rem * 0.75) 0;
+  }
+
   .task-list-item {
     margin-bottom: calc(1rem * 0.75);
     padding-left: calc(0.5rem * 0.75);
@@ -185,7 +199,7 @@
   }
 
   .task-list-item input[type="checkbox"] {
-    top: calc(0.9389rem * 0.75);
+    top: calc(0.7512rem * 0.75);
 
     width: calc(0.75rem * 0.75);
     height: calc(0.75rem * 0.75);
@@ -221,6 +235,10 @@
     font-size: calc(1.877rem * 0.625);
   }
 
+  .contains-task-list p {
+    margin: calc(1rem * 0.625) 0;
+  }
+
   .task-list-item {
     margin-bottom: calc(1rem * 0.625);
     padding-left: calc(0.5rem * 0.625);
@@ -231,7 +249,7 @@
   }
 
   .task-list-item input[type="checkbox"] {
-    top: calc(0.9389rem * 0.625);
+    top: calc(0.7512rem * 0.625);
 
     width: calc(0.75rem * 0.625);
     height: calc(0.75rem * 0.625);
@@ -267,6 +285,10 @@
     font-size: calc(1.877rem * 0.5625);
   }
 
+  .contains-task-list p {
+    margin: calc(1rem * 0.5625) 0;
+  }
+
   .task-list-item {
     margin-bottom: calc(1rem * 0.5625);
     padding-left: calc(0.5rem * 0.5625);
@@ -277,7 +299,7 @@
   }
 
   .task-list-item input[type="checkbox"] {
-    top: calc(0.9389rem * 0.5625);
+    top: calc(0.7512rem * 0.5625);
 
     width: calc(0.75rem * 0.5625);
     height: calc(0.75rem * 0.5625);
