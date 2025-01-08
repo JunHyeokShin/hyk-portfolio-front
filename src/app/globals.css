@@ -1,21 +1,24 @@
 :root {
   --white: #ffffff;
   --black: #1a1a1a;
-  --gunmetal: #282c34;
   --gray: #a3a3a3;
   --gray-dark: #585858;
   --gray-light: #ececec;
-  --yellow: #ffdc1f;
+  --red: #f97583;
   --blue: #005cff;
-  --red: #fc6767;
+  --yellow: #ffdc1f;
+  --github-white: #e1e4e8;
+  --github-black: #24292e;
+  --github-red: #f97583;
+  --github-blue: #79b8ff;
+  --github-orange: #ffab70;
+  --github-purple: #b392f0;
 }
 
 * {
   margin: 0;
   padding: 0;
   border: 0;
-
-  -webkit-font-smoothing: antialiased;
 }
 
 body,
@@ -23,6 +26,9 @@ html {
   color: var(--black);
   background: var(--white);
   font-family: var(--font-helvetica-neue-cyr), var(--font-pretendard);
+
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: none;
 }
 
 a {
