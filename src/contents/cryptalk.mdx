@@ -198,7 +198,7 @@ Prior to initialization both parties must use some key agreement protocol to agr
 
 Once Alice and Bob have agreed on _SK_ and Bob's ratchet public key, Alice calls _RatchetInitAlice()_ and Bob calls _RatchetInitBob()_:
 
-```
+```python
 def RatchetInitAlice(state, SK, bob_dh_public_key):
     state.DHs = GENERATE_DH()
     state.DHr = bob_dh_public_key
@@ -225,7 +225,7 @@ def RatchetInitBob(state, SK, bob_dh_key_pair):
 
 _RatchetEncrypt()_ is called to encrypt messages. This function performs a symmetric-key ratchet step, then encrypts the message with the resulting message key. In addition to the message's _plaintext_ it takes an _AD_ byte sequence which is prepended to the header to form the associated data for the underlying AEAD encryption:
 
-```
+```python
 def RatchetEncrypt(state, plaintext, AD):
     state.CKs, mk = KDF_CK(state.CKs)
     header = HEADER(state.DHs, state.PN, state.Ns)
@@ -245,7 +245,7 @@ _RatchetDecrypt()_ is called to decrypt messages. This function does the followi
 
 If an exception is raised (e.g. message authentication failure) then the message is discarded and changes to the state object are discarded. Otherwise, the decrypted plaintext is accepted and changes to the state object are stored:
 
-```
+```python
 def RatchetDecrypt(state, header, ciphertext, AD):
     plaintext = TrySkippedMessageKeys(state, header, ciphertext, AD)
     if plaintext != None:
@@ -350,7 +350,7 @@ Some additional shared secrets must be used to initialize the header keys:
 
 Once Alice and Bob have agreed on _SK_, Bob's ratchet public key, and these additional values, Alice calls _RatchetInitAliceHE()_ and Bob calls _RatchetInitBobHE()_:
 
-```
+```python
 def RatchetInitAliceHE(state, SK, bob_dh_public_key, shared_hka, shared_nhkb):
     state.DHRs = GENERATE_DH()
     state.DHRr = bob_dh_public_key
@@ -384,7 +384,7 @@ def RatchetInitBobHE(state, SK, bob_dh_key_pair, shared_hka, shared_nhkb):
 
 The _RatchetEncryptHE()_ function is called to encrypt messages with header encryption:
 
-```
+```python
 def RatchetEncryptHE(state, plaintext, AD):
     state.CKs, mk = KDF_CK(state.CKs)
     header = HEADER(state.DHRs, state.PN, state.Ns)
@@ -397,7 +397,7 @@ def RatchetEncryptHE(state, plaintext, AD):
 
 _RatchetDecryptHE()_ is called to decrypt messages with header encryption:
 
-```
+```python
 def RatchetDecryptHE(state, enc_header, ciphertext, AD):
     plaintext = TrySkippedMessageKeysHE(state, enc_header, ciphertext, AD)
     if plaintext != None:
@@ -438,7 +438,7 @@ def SkipMessageKeysHE(state, until):
             state.Nr += 1
 ```
 
-```
+```python
 def DHRatchetHE(state, header):
     state.PN = state.Ns
     state.Ns = 0

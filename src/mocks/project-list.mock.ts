@@ -2,6 +2,13 @@ import { ProjectListItem } from "@/types/interface";
 
 const projectListMock: ProjectListItem[] = [
   {
+    id: "hyk-portfolio",
+    title: "HYK Portfolio",
+    titleImage: "/project-resources/hyk-portfolio/title-image.png",
+    themeColor: "#4D2D22",
+    description: "NFT Marketplace",
+  },
+  {
     id: "wmp-nft",
     title: "WMP NFT",
     titleImage: "/project-resources/wmp-nft/title-image.png",
