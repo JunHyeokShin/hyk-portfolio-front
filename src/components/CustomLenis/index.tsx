@@ -23,7 +23,6 @@ export default function CustomLenis({ root, options, children, className, props 
   };
 
   const onClickHandler = (e: MouseEvent) => {
-    console.log("onClickHandler");
     const clickedElement = e.target as HTMLElement;
     if (clickedElement.tagName.toLowerCase() === "a") {
       const href = clickedElement.getAttribute("href");
