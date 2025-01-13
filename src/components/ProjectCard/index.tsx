@@ -37,13 +37,7 @@ export default function ProjectCard({ project }: Props) {
   });
 
   return (
-    <Link
-      key={project.id}
-      href={`/project/${project.id}`}
-      className={styles["project-container"]}
-      style={{ background: `${project.themeColor}` }}
-      id={project.id}
-    >
+    <Link href={`/project/${project.id}`} className={styles["project-container"]} style={{ background: `${project.themeColor}` }} id={project.id}>
       <div className={styles["project-info-box"]}>
         <Image src={project.titleImage ? project.titleImage : ""} alt={project.title} width={1600} height={1200} className={styles["project-title-image"]} />
         <div className={styles["project-info"]}>

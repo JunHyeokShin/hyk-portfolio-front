@@ -10,7 +10,7 @@ export default function Home() {
         <Header />
         <section className={styles["content"]}>
           {projectListMock.map((project) => (
-            <ProjectCard project={project} />
+            <ProjectCard project={project} key={project.id} />
           ))}
         </section>
       </main>
