@@ -33,7 +33,7 @@ export default function CustomLenis({ root, options, children, className, props 
         if (targetToScroll && lenisRef.current?.lenis) {
           const marginTop = window.getComputedStyle(targetToScroll).marginTop;
           const offset = isNaN(parseInt(marginTop)) ? 0 : -parseInt(marginTop);
-          lenisRef.current?.lenis?.scrollTo(targetToScroll, { offset });
+          lenisRef.current?.lenis?.scrollTo(targetToScroll, { offset, lerp: options?.lerp, duration: options?.duration });
         }
       }
     }

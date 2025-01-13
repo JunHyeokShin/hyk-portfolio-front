@@ -6,20 +6,18 @@ import Link from "next/link";
 import { PiGithubLogoLight, PiInstagramLogoLight } from "react-icons/pi";
 import styles from "./style.module.css";
 
-gsap.registerPlugin(useGSAP);
-
 export default function Header() {
   useGSAP(() => {
     gsap.to("#header", { opacity: 1, duration: 0 });
-    gsap.from("#title-p", { y: "100%", duration: 1, ease: "power2.out" });
-    gsap.from("#title-r", { y: "100%", duration: 1, delay: 0.05, ease: "power2.out" });
-    gsap.from("#title-o", { y: "100%", duration: 1, delay: 0.1, ease: "power2.out" });
-    gsap.from("#title-j", { y: "100%", duration: 1, delay: 0.15, ease: "power2.out" });
-    gsap.from("#title-e", { y: "100%", duration: 1, delay: 0.2, ease: "power2.out" });
-    gsap.from("#title-c", { y: "100%", duration: 1, delay: 0.25, ease: "power2.out" });
-    gsap.from("#title-t", { y: "100%", duration: 1, delay: 0.3, ease: "power2.out" });
-    gsap.from("#title-s, #pretitle, #email", { y: "100%", duration: 1, delay: 0.35, ease: "power2.out" });
-    gsap.from("#icon-github, #icon-instagram", { opacity: 0, duration: 1, delay: 0.35, ease: "power2.out" });
+    gsap.from("#title-p", { y: "100%", duration: 1, delay: 0.15, ease: "power2.out" });
+    gsap.from("#title-r", { y: "100%", duration: 1, delay: 0.2, ease: "power2.out" });
+    gsap.from("#title-o", { y: "100%", duration: 1, delay: 0.25, ease: "power2.out" });
+    gsap.from("#title-j", { y: "100%", duration: 1, delay: 0.3, ease: "power2.out" });
+    gsap.from("#title-e", { y: "100%", duration: 1, delay: 0.35, ease: "power2.out" });
+    gsap.from("#title-c", { y: "100%", duration: 1, delay: 0.4, ease: "power2.out" });
+    gsap.from("#title-t", { y: "100%", duration: 1, delay: 0.45, ease: "power2.out" });
+    gsap.from("#title-s, #pretitle, #email", { y: "100%", duration: 1, delay: 0.5, ease: "power2.out" });
+    gsap.from("#icon-github, #icon-instagram", { opacity: 0, duration: 1, delay: 0.5, ease: "power2.out" });
   });
 
   return (
