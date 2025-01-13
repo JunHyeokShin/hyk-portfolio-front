@@ -6,7 +6,7 @@ const projectListMock: ProjectListItem[] = [
     title: "HYK Portfolio",
     titleImage: "/project-resources/hyk-portfolio/title-image.png",
     themeColor: "#4D2D22",
-    description: "NFT Marketplace",
+    description: "Portfolio website",
   },
   {
     id: "wmp-nft",

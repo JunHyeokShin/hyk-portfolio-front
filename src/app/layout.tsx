@@ -50,7 +50,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <CustomLenis root>
+    <CustomLenis root options={{ lerp: 0.09 }}>
       <html lang="en">
         <body className={`${HelveticaNeueCyr.variable} ${JetBrainsMono.variable} ${Pretendard.variable} ${SegoeUISymbol.variable}`}>{children}</body>
       </html>
