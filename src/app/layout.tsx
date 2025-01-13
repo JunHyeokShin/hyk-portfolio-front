@@ -1,3 +1,4 @@
+import CustomLenis from "@/components/CustomLenis";
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
@@ -49,8 +50,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${HelveticaNeueCyr.variable} ${JetBrainsMono.variable} ${Pretendard.variable} ${SegoeUISymbol.variable}`}>{children}</body>
-    </html>
+    <CustomLenis root>
+      <html lang="en">
+        <body className={`${HelveticaNeueCyr.variable} ${JetBrainsMono.variable} ${Pretendard.variable} ${SegoeUISymbol.variable}`}>{children}</body>
+      </html>
+    </CustomLenis>
   );
 }
