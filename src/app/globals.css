@@ -48,63 +48,6 @@ code {
   font-family: var(--font-jetbrains-mono), var(--font-pretendard);
 }
 
-button {
-  padding: 1.25rem 1.875rem;
-  border: none;
-  border-radius: 3.75rem;
-  outline-style: solid;
-  outline-width: 1px;
-
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-
-  background: none;
-  cursor: pointer;
-}
-
-.button-black {
-  outline-color: var(--black);
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.03);
-  }
-
-  &:active {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-}
-
-.button-white {
-  outline-color: var(--white);
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.03);
-  }
-
-  &:active {
-    background-color: rgba(255, 255, 255, 0.05);
-  }
-}
-
-.button-text-black {
-  font-size: 1.125rem;
-  line-height: 100%;
-  letter-spacing: -0.05em;
-}
-
-.button-text-white {
-  color: var(--white);
-  font-size: 1.125rem;
-  line-height: 100%;
-  letter-spacing: -0.05em;
-}
-
-.button-icon {
-  color: var(--yellow);
-  font-size: 1.5rem;
-}
-
 .hidden-y {
   overflow-y: hidden;
 }

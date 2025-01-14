@@ -9,18 +9,24 @@
   justify-content: space-between;
 
   text-decoration: none;
+  visibility: hidden;
   opacity: 0;
 }
 
 .project-info-box {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+.project-title-image-wrapper {
+  border-radius: 2.5rem;
+  overflow: hidden;
 }
 
 .project-title-image {
   width: 100%;
   height: auto;
-  border-radius: 2.5rem;
 
   display: block;
 }
@@ -48,4 +54,55 @@
 
 .project-button-container {
   padding: 1.25rem 1.875rem 1.875rem;
+}
+
+.project-button {
+  padding: 1.25rem 1.875rem;
+  border-radius: 3.75rem;
+  outline-style: solid;
+  outline-width: 1px;
+  outline-color: var(--white);
+
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  background: none;
+  cursor: pointer;
+}
+
+.project-button-text {
+  color: var(--white);
+  font-family: var(--font-helvetica-neue-cyr), var(--font-pretendard);
+  font-size: 1.125rem;
+  letter-spacing: -0.05em;
+}
+
+.project-button-icon-wrapper {
+  position: relative;
+  rotate: 45deg;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  overflow: hidden;
+}
+
+.project-button-icon {
+  position: absolute;
+  rotate: -45deg;
+  top: 0;
+  left: 0;
+
+  color: var(--yellow);
+  font-size: 1.5rem;
+}
+
+.project-button-icon-second {
+  position: absolute;
+  rotate: -45deg;
+  top: 1.5rem;
+  left: 0;
+
+  color: var(--yellow);
+  font-size: 1.5rem;
 }
