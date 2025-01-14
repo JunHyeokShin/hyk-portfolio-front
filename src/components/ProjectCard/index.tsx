@@ -41,7 +41,7 @@ export default function ProjectCard({ project }: Props) {
     gsap.to(`#${project.id}-title-image-wrapper`, { translateY: "1%", scaleY: 1.02, duration: 0.5, ease: "power2.out" });
     gsap.to(`#${project.id}-title-image`, { scaleX: 1.1, scaleY: 1.1 / 1.02, duration: 0.5, ease: "power2.out" });
     gsap.to(`#${project.id}-button`, { backgroundColor: "#ffffffff", scale: 1.03, duration: 0.5, ease: "power2.out" });
-    gsap.to(`#${project.id}-button-text`, { color: "black", duration: 0.5, ease: "power2.out" });
+    gsap.to(`#${project.id}-button-text`, { color: "#1a1a1a", duration: 0.5, ease: "power2.out" });
     gsap.to(`#${project.id}-button-icon`, { top: "-1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
     gsap.to(`#${project.id}-button-icon-second`, { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
   };
@@ -50,7 +50,7 @@ export default function ProjectCard({ project }: Props) {
     gsap.to(`#${project.id}-title-image-wrapper`, { translateY: 0, scaleY: 1, duration: 0.5, ease: "power2.out" });
     gsap.to(`#${project.id}-title-image`, { scale: 1, duration: 0.5, ease: "power2.out" });
     gsap.to(`#${project.id}-button`, { backgroundColor: "#00000000", scale: 1, duration: 0.5, ease: "power2.out" });
-    gsap.to(`#${project.id}-button-text`, { color: "white", duration: 0.5, ease: "power2.out" });
+    gsap.to(`#${project.id}-button-text`, { color: "#ffffff", duration: 0.5, ease: "power2.out" });
     gsap.to(`#${project.id}-button-icon`, { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
     gsap.to(`#${project.id}-button-icon-second`, { top: "1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
   };
