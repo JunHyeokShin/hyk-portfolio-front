@@ -11,18 +11,18 @@ export default function Header() {
   const animation = useRef<GSAPTimeline>(null);
 
   useGSAP(() => {
-    animation.current = gsap.timeline({ paused: true });
-    animation.current.to("#header", { opacity: 1, duration: 0 });
-    animation.current.from("#title-p", { y: "100%", duration: 1, ease: "power2.out" });
-    animation.current.from("#title-r", { y: "100%", duration: 1, ease: "power2.out" }, "<0.05");
-    animation.current.from("#title-o", { y: "100%", duration: 1, ease: "power2.out" }, "<0.05");
-    animation.current.from("#title-j", { y: "100%", duration: 1, ease: "power2.out" }, "<0.05");
-    animation.current.from("#title-e", { y: "100%", duration: 1, ease: "power2.out" }, "<0.05");
-    animation.current.from("#title-c", { y: "100%", duration: 1, ease: "power2.out" }, "<0.05");
-    animation.current.from("#title-t", { y: "100%", duration: 1, ease: "power2.out" }, "<0.05");
-    animation.current.from("#title-s, #pretitle, #email", { y: "100%", duration: 1, ease: "power2.out" }, "<0.05");
-    animation.current.from("#icon-github, #icon-instagram", { opacity: 0, duration: 1, ease: "power2.out" }, "<");
-    animation.current.play();
+    animation.current = gsap
+      .timeline()
+      .to("#header", { opacity: 1, duration: 0 })
+      .from("#title-p", { y: "100%", duration: 1, ease: "power2.out" })
+      .from("#title-r", { y: "100%", duration: 1, ease: "power2.out" }, "<0.05")
+      .from("#title-o", { y: "100%", duration: 1, ease: "power2.out" }, "<0.05")
+      .from("#title-j", { y: "100%", duration: 1, ease: "power2.out" }, "<0.05")
+      .from("#title-e", { y: "100%", duration: 1, ease: "power2.out" }, "<0.05")
+      .from("#title-c", { y: "100%", duration: 1, ease: "power2.out" }, "<0.05")
+      .from("#title-t", { y: "100%", duration: 1, ease: "power2.out" }, "<0.05")
+      .from("#title-s, #pretitle, #email", { y: "100%", duration: 1, ease: "power2.out" }, "<0.05")
+      .from("#icon-github, #icon-instagram", { opacity: 0, duration: 1, ease: "power2.out" }, "<");
   });
 
   return (

@@ -37,9 +37,10 @@ export default function ProjectCard({ project }: Props) {
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
-    revealAnimation.current = gsap.timeline({ scrollTrigger: { trigger: `#${project.id}`, start: "50% bottom" } });
-    revealAnimation.current.from(`#${project.id}`, { y: "15%", duration: 1.5, ease: "power2.out" });
-    revealAnimation.current.to(`#${project.id}`, { opacity: 1, visibility: "inherit", duration: 1.5, ease: "power2.out" }, "<");
+    revealAnimation.current = gsap
+      .timeline({ scrollTrigger: { trigger: `#${project.id}`, start: "50% bottom" } })
+      .from(`#${project.id}`, { y: "15%", duration: 1.5, ease: "power2.out" })
+      .to(`#${project.id}`, { opacity: 1, visibility: "inherit", duration: 1.5, ease: "power2.out" }, "<");
   });
 
   return (
