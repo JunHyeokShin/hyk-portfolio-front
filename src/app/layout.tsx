@@ -1,4 +1,5 @@
 import CustomLenis from "@/components/CustomLenis";
+import MenuButton from "@/components/MenuButton";
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
@@ -52,7 +53,10 @@ export default function RootLayout({
   return (
     <CustomLenis root options={{ lerp: 0.09 }}>
       <html lang="en">
-        <body className={`${HelveticaNeueCyr.variable} ${JetBrainsMono.variable} ${Pretendard.variable} ${SegoeUISymbol.variable}`}>{children}</body>
+        <body className={`${HelveticaNeueCyr.variable} ${JetBrainsMono.variable} ${Pretendard.variable} ${SegoeUISymbol.variable}`}>
+          {children}
+          <MenuButton />
+        </body>
       </html>
     </CustomLenis>
   );
