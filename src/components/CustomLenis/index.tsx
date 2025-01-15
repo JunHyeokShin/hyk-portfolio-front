@@ -1,5 +1,6 @@
 "use client";
 
+import { LenisRefContext } from "@/contexts";
 import Lenis, { LenisOptions } from "lenis";
 import ReactLenis, { LenisProps, LenisRef } from "lenis/react";
 import { useEffect, useRef, useState } from "react";
@@ -24,15 +25,19 @@ export default function CustomLenis({ root, options, children, className, props 
 
   const onClickHandler = (e: MouseEvent) => {
     const clickedElement = e.target as HTMLElement;
-    if (clickedElement.tagName.toLowerCase() === "a") {
+    if (clickedElement.tagName.toLowerCase() === "a" && lenisRef.current?.lenis) {
       const href = clickedElement.getAttribute("href");
       if (href?.startsWith("#")) {
         const id = href.slice(1);
+        if (id === "") {
+          lenisRef.current.lenis.scrollTo(0);
+          return;
+        }
         const targetToScroll = document.getElementById(id);
-        if (targetToScroll && lenisRef.current?.lenis) {
+        if (targetToScroll) {
           const marginTop = window.getComputedStyle(targetToScroll).marginTop;
           const offset = isNaN(parseInt(marginTop)) ? 0 : -parseInt(marginTop);
-          lenisRef.current?.lenis?.scrollTo(targetToScroll, { offset, lerp: options?.lerp, duration: options?.duration });
+          lenisRef.current.lenis.scrollTo(targetToScroll, { offset });
         }
       }
     }
@@ -52,7 +57,7 @@ export default function CustomLenis({ root, options, children, className, props 
 
   return (
     <ReactLenis root={root} options={options} className={className} ref={lenisRef} {...props}>
-      {children}
+      <LenisRefContext value={lenisRef}>{children}</LenisRefContext>
     </ReactLenis>
   );
 }
