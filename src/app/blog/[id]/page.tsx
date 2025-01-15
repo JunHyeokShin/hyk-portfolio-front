@@ -4,13 +4,13 @@ interface Params {
   params: Promise<{ id: string }>;
 }
 
-export default async function ProjectPage({ params }: Params) {
+export default async function PostPage({ params }: Params) {
   const id = (await params).id;
-  const { default: ProjectContent } = await import(`@/contents/project/${id}.mdx`);
+  const { default: PostContent } = await import(`@/contents/post/${id}.mdx`);
 
   return (
     <main className="mdx-container">
-      <ProjectContent />
+      <PostContent />
     </main>
   );
 }

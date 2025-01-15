@@ -40,7 +40,7 @@ We define a **KDF** as a cryptographic function that takes a secret and random *
 
 We use the term **KDF chain** when some of the output from a KDF is used as an **output key** and some is used to replace the KDF key, which can then be used with another input. The below diagram represents a KDF chain processing three inputs and producing three output keys:
 
-![1.png](/project-resources/cryptalk/1.png)
+![1.png](/resources/project/cryptalk/1.png)
 
 A KDF chain has the following properties (using terminology adapted from[^4]):
 
@@ -62,7 +62,7 @@ Every message sent or received is encrypted with a unique **message key**. The m
 
 The KDF inputs for the sending and receiving chains are constant, so these chains don't provide break-in recovery. The sending and receiving chains just ensure that each message is encrypted with a unique key that can be deleted after encryption or decryption. Calculating the next chain key and message key from a given chain key is a single **ratchet step** in the **symmetric-key ratchet**. The below diagram shows two steps:
 
-![2.png](/project-resources/cryptalk/2.png)
+![2.png](/resources/project/cryptalk/2.png)
 
 Because message keys aren't used to derive any other keys, message keys may be stored without affecting the security of other message keys. This is useful for handling lost or out-of-order messages (see [Section 2.6](#26-out-of-order-messages)).
 
@@ -78,33 +78,33 @@ The following diagrams show how the DH ratchet derives a shared sequence of DH o
 
 Alice is initialized with Bob's ratchet public key. Alice's ratchet public key isn't yet known to Bob. As part of initialization Alice performs a DH calculation between her ratchet private key and Bob's ratchet public key:
 
-![3.png](/project-resources/cryptalk/3.png)
+![3.png](/resources/project/cryptalk/3.png)
 
 Alice's initial messages advertise her ratchet public key. Once Bob receives one of these messages, Bob performs a DH ratchet step: He calculates the DH output between Alice's ratchet public key and his ratchet private key, which equals Alice's initial DH output. Bob then replaces his ratchet key pair and calculates a new DH output:
 
-![4.png](/project-resources/cryptalk/4.png)
+![4.png](/resources/project/cryptalk/4.png)
 
 Messages sent by Bob advertise his new public key. Eventually, Alice will receive one of Bob's messages and perform a DH ratchet step, replacing her ratchet key pair and deriving two DH outputs, one that matches Bob's latest and a new one:
 
-![5.png](/project-resources/cryptalk/5.png)
+![5.png](/resources/project/cryptalk/5.png)
 
 Messages sent by Alice advertise her new public key. Eventually, Bob will receive one of these messages and perform a second DH ratchet step, and so on:
 
-![6.png](/project-resources/cryptalk/6.png)
+![6.png](/resources/project/cryptalk/6.png)
 
 The DH outputs generated during each DH ratchet step are used to derive new sending and receiving chain keys. The below diagram revisits Bob's first ratchet step. Bob uses his first DH output to derive a receiving chain that matches Alice's sending chain. Bob uses the second DH output to derive a new sending chain:
 
-![7.png](/project-resources/cryptalk/7.png)
+![7.png](/resources/project/cryptalk/7.png)
 
 As the parties take turns performing DH ratchet steps, they take turns introducing new sending chains:
 
-![8.png](/project-resources/cryptalk/8.png)
+![8.png](/resources/project/cryptalk/8.png)
 
 However, the above picture is a simplification. Instead of taking the chain keys directly from DH outputs, the DH outputs are used as KDF inputs to a root chain, and the KDF outputs from the root chain are used as sending and receiving chain keys. Using a KDF chain here improves resilience and break-in recovery.
 
 So a full DH ratchet step consists of updating the root KDF chain twice, and using the KDF output keys as new receiving and sending chain keys:
 
-![9.png](/project-resources/cryptalk/9.png)
+![9.png](/resources/project/cryptalk/9.png)
 
 #### 2.4. Double Ratchet
 
@@ -115,23 +115,23 @@ Combining the symmetric-key and DH ratchets gives the Double Ratchet:
 
 In the below diagram Alice has been initialized with Bob's ratchet public key and a shared secret which is the initial root key. As part of initialization Alice generates a new ratchet key pair, and feeds the DH output to the root KDF to calculate a new root key (_RK_) and sending chain key (_CK_):
 
-![10.png](/project-resources/cryptalk/10.png)
+![10.png](/resources/project/cryptalk/10.png)
 
 When Alice sends her first message _A1_, she applies a symmetric-key ratchet step to her sending chain key, resulting in a new message key (message keys will be labelled with the message they encrypt or decrypt). The new chain key is stored, but the message key and old chain key can be deleted:
 
-![11.png](/project-resources/cryptalk/11.png)
+![11.png](/resources/project/cryptalk/11.png)
 
 If Alice next receives a response _B1_ from Bob, it will contain a new ratchet public key (Bob's public keys are labelled with the message when they were first received). Alice applies a DH ratchet step to derive new receiving and sending chain keys. Then she applies a symmetric-key ratchet step to the receiving chain to get the message key for the received message:
 
-![12.png](/project-resources/cryptalk/12.png)
+![12.png](/resources/project/cryptalk/12.png)
 
 Suppose Alice next sends a message _A2_, receives a message _B2_ with Bob's old ratchet public key, then sends messages _A3_ and _A4_. Alice's sending chain will ratchet three steps, and her receiving chain will ratchet once:
 
-![13.png](/project-resources/cryptalk/13.png)
+![13.png](/resources/project/cryptalk/13.png)
 
 Suppose Alice then receives messages _B3_ and _B4_ with Bob's next ratchet key, then sends a message _A5_. Alice's final state will be as follows:
 
-![14.png](/project-resources/cryptalk/14.png)
+![14.png](/resources/project/cryptalk/14.png)
 
 #### 2.6. Out-of-order messages
 
@@ -143,7 +143,7 @@ If a DH ratchet step isn't triggered, then the received _N_ minus the length of 
 
 For example, consider the message sequence from the previous section when messages _B2_ and _B3_ are skipped. Message _B4_ will trigger Alice's DH ratchet step (instead of _B3_). Message _B4_ will have _PN_=2 and _N_=1. On receiving _B4_ Alice will have a receiving chain of length 1 (_B1_), so Alice will store message keys for _B2_ and _B3_ so they can be decrypted if they arrive later:
 
-![15.png](/project-resources/cryptalk/15.png)
+![15.png](/resources/project/cryptalk/15.png)
 
 ### 3. Double Ratchet
 
@@ -301,23 +301,23 @@ After associating the message with a session, the recipient attempts to decrypt 
 
 In the below diagram Alice has been initialized with Bob's ratchet public key and shared secrets for the initial root key, the sending header key (_HK_), and the receiving next header key (_NHK_). As part of initialization Alice generates her ratchet key pair and updates the root chain to derive a new root key, sending chain key, and sending next header key (_NHK_):
 
-![16.png](/project-resources/cryptalk/16.png)
+![16.png](/resources/project/cryptalk/16.png)
 
 When Alice sends her first message _A1_, she encrypts its header with the sending header key she was initialized with:
 
-![17.png](/project-resources/cryptalk/17.png)
+![17.png](/resources/project/cryptalk/17.png)
 
 If Alice next receives a response B1 from Bob, its header will be encrypted with the receiving next header key that she was initialized with. Alice applies a DH ratchet step which shifts the next header keys into the current header keys, and generates new next header keys:
 
-![18.png](/project-resources/cryptalk/18.png)
+![18.png](/resources/project/cryptalk/18.png)
 
 Alice next sends a message _A2_, then receives a message _B2_ using the current receiving header key and containing the same ratchet public key she received in message _B1_. Alice then sends messages _A3_ and _A4_. The current header keys are used for all sent and received messages:
 
-![19.png](/project-resources/cryptalk/19.png)
+![19.png](/resources/project/cryptalk/19.png)
 
 Alice then receives message _B3_ containing Bob's next ratchet key and with its header encrypted by the next receiving header key. Successful header decryption with the next header key will trigger a DH ratchet step. Alice then receives _B4_ with the same ratchet key and header key, then sends a message _A5_. Alice's final state will be as follows:
 
-![20.png](/project-resources/cryptalk/20.png)
+![20.png](/resources/project/cryptalk/20.png)
 
 #### 4.2. External functions
 

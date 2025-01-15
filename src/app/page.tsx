@@ -5,15 +5,13 @@ import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div className={styles["wrapper"]}>
-      <main className={styles["container"]}>
-        <Header />
-        <section className={styles["content"]}>
-          {projectListMock.map((project) => (
-            <ProjectCard project={project} key={project.id} />
-          ))}
-        </section>
-      </main>
-    </div>
+    <main className={styles["container"]}>
+      <Header />
+      <section className={styles["content"]}>
+        {projectListMock.map((project) => (
+          <ProjectCard project={project} key={project.id} />
+        ))}
+      </section>
+    </main>
   );
 }

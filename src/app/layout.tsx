@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import styles from "./layout.module.css";
 
 const HelveticaNeueCyr = localFont({
   src: [
@@ -54,7 +55,7 @@ export default function RootLayout({
     <CustomLenis root options={{ lerp: 0.09 }}>
       <html lang="en">
         <body className={`${HelveticaNeueCyr.variable} ${JetBrainsMono.variable} ${Pretendard.variable} ${SegoeUISymbol.variable}`}>
-          {children}
+          <div className={styles["wrapper"]}>{children}</div>
           <MenuButton />
         </body>
       </html>
