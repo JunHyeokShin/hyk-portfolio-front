@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
 import { GoArrowUpRight } from "react-icons/go";
 import styles from "./style.module.css";
 
@@ -14,28 +15,7 @@ interface Props {
 }
 
 export default function ProjectCard({ project }: Props) {
-  useGSAP(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.from(`#${project.id}`, {
-      scrollTrigger: {
-        trigger: `#${project.id}`,
-        start: "50% bottom",
-      },
-      y: "15%",
-      duration: 1.5,
-      ease: "power2.out",
-    });
-    gsap.to(`#${project.id}`, {
-      scrollTrigger: {
-        trigger: `#${project.id}`,
-        start: "50% bottom",
-      },
-      opacity: 1,
-      visibility: "inherit",
-      duration: 1.5,
-      ease: "power2.out",
-    });
-  });
+  const revealAnimation = useRef<GSAPTimeline>(null);
 
   const onMouseEnterHandler = () => {
     gsap.to(`#${project.id}-title-image-wrapper`, { translateY: "1%", scaleY: 1.02, duration: 0.5, ease: "power2.out" });
@@ -54,6 +34,13 @@ export default function ProjectCard({ project }: Props) {
     gsap.to(`#${project.id}-button-icon`, { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
     gsap.to(`#${project.id}-button-icon-second`, { top: "1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
   };
+
+  useGSAP(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    revealAnimation.current = gsap.timeline({ scrollTrigger: { trigger: `#${project.id}`, start: "50% bottom" } });
+    revealAnimation.current.from(`#${project.id}`, { y: "15%", duration: 1.5, ease: "power2.out" });
+    revealAnimation.current.to(`#${project.id}`, { opacity: 1, visibility: "inherit", duration: 1.5, ease: "power2.out" }, "<");
+  });
 
   return (
     <Link

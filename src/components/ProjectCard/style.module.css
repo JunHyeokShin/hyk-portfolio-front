@@ -29,6 +29,7 @@
   height: auto;
 
   display: block;
+  user-select: none;
 }
 
 .project-info {
