@@ -6,9 +6,6 @@
 
 .menu-button {
   border-radius: 50%;
-  outline-width: 1px;
-  outline-style: solid;
-  outline-color: var(--gray-dark);
   width: 2.25rem;
   height: 2.25rem;
 
@@ -52,9 +49,6 @@
   left: 0.125rem;
 
   border-radius: 50%;
-  outline-width: 1px;
-  outline-style: solid;
-  outline-color: var(--gray-dark);
   width: 2rem;
   height: 2rem;
 
