@@ -1,0 +1,30 @@
+.not-loading {
+  font-size: 1.877rem;
+  font-weight: 300;
+  line-height: 110%;
+  letter-spacing: -0.01em;
+}
+
+@media screen and (max-width: 110em) {
+  .not-loading {
+    font-size: calc(1.877rem * 0.875);
+  }
+}
+
+@media screen and (max-width: 80em) {
+  .not-loading {
+    font-size: calc(1.877rem * 0.75);
+  }
+}
+
+@media screen and (max-width: 50em) {
+  .not-loading {
+    font-size: calc(1.877rem * 0.625);
+  }
+}
+
+@media screen and (max-width: 35em) {
+  .not-loading {
+    font-size: calc(1.877rem * 0.5625);
+  }
+}

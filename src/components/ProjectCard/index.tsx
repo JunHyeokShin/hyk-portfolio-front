@@ -18,8 +18,8 @@ export default function ProjectCard({ project }: Props) {
   const revealAnimation = useRef<GSAPTimeline>(null);
 
   const onMouseEnterHandler = () => {
-    gsap.to(`#${project.id}-title-image-wrapper`, { translateY: "1%", scaleY: 1.02, duration: 0.5, ease: "power2.out" });
-    gsap.to(`#${project.id}-title-image`, { scaleX: 1.1, scaleY: 1.1 / 1.02, duration: 0.5, ease: "power2.out" });
+    gsap.to(`#${project.id}-thumbnail-wrapper`, { translateY: "1%", scaleY: 1.02, duration: 0.5, ease: "power2.out" });
+    gsap.to(`#${project.id}-thumbnail`, { scaleX: 1.1, scaleY: 1.1 / 1.02, duration: 0.5, ease: "power2.out" });
     gsap.to(`#${project.id}-button`, { backgroundColor: "#ffffffff", scale: 1.03, duration: 0.5, ease: "power2.out" });
     gsap.to(`#${project.id}-button-text`, { color: "#1a1a1a", duration: 0.5, ease: "power2.out" });
     gsap.to(`#${project.id}-button-icon`, { top: "-1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
@@ -27,8 +27,8 @@ export default function ProjectCard({ project }: Props) {
   };
 
   const onMouseLeaveHandler = () => {
-    gsap.to(`#${project.id}-title-image-wrapper`, { translateY: 0, scaleY: 1, duration: 0.5, ease: "power2.out" });
-    gsap.to(`#${project.id}-title-image`, { scale: 1, duration: 0.5, ease: "power2.out" });
+    gsap.to(`#${project.id}-thumbnail-wrapper`, { translateY: 0, scaleY: 1, duration: 0.5, ease: "power2.out" });
+    gsap.to(`#${project.id}-thumbnail`, { scale: 1, duration: 0.5, ease: "power2.out" });
     gsap.to(`#${project.id}-button`, { backgroundColor: "#00000000", scale: 1, duration: 0.5, ease: "power2.out" });
     gsap.to(`#${project.id}-button-text`, { color: "#ffffff", duration: 0.5, ease: "power2.out" });
     gsap.to(`#${project.id}-button-icon`, { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
@@ -47,7 +47,7 @@ export default function ProjectCard({ project }: Props) {
     <Link
       href={`/project/${project.id}`}
       className={styles["project-container"]}
-      style={{ background: `${project.themeColor}` }}
+      style={{ background: project.themeColor }}
       id={project.id}
       onMouseEnter={onMouseEnterHandler}
       onTouchStart={onMouseEnterHandler}
@@ -55,18 +55,18 @@ export default function ProjectCard({ project }: Props) {
       onTouchEnd={onMouseLeaveHandler}
     >
       <div className={styles["project-info-box"]}>
-        <div className={styles["project-title-image-wrapper"]} id={`${project.id}-title-image-wrapper`}>
+        <div className={styles["project-thumbnail-wrapper"]} id={`${project.id}-thumbnail-wrapper`}>
           <Image
-            src={project.titleImage ? project.titleImage : ""}
-            alt={project.title}
+            src={project.thumbnail ? project.thumbnail : "/resources/default-thumbnail.png"}
+            alt={project.name}
             width={1600}
             height={1200}
-            className={styles["project-title-image"]}
-            id={`${project.id}-title-image`}
+            className={styles["project-thumbnail"]}
+            id={`${project.id}-thumbnail`}
           />
         </div>
         <div className={styles["project-info"]}>
-          <h2 className={styles["project-title"]}>{project.title}</h2>
+          <h2 className={styles["project-name"]}>{project.name}</h2>
           <p className={styles["project-description"]}>{project.description}</p>
         </div>
       </div>
