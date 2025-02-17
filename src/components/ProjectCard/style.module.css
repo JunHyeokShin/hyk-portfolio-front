@@ -19,12 +19,12 @@
   overflow: hidden;
 }
 
-.project-title-image-wrapper {
+.project-thumbnail-wrapper {
   border-radius: 2.5rem;
   overflow: hidden;
 }
 
-.project-title-image {
+.project-thumbnail {
   width: 100%;
   height: auto;
 
@@ -42,7 +42,7 @@
   color: var(--white);
 }
 
-.project-title {
+.project-name {
   font-size: 1.875rem;
   font-weight: 400;
   line-height: 100%;

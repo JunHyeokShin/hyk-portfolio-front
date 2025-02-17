@@ -1,7 +1,7 @@
 export default interface ProjectListItem {
   id: string;
-  title: string;
-  titleImage: string | null;
-  themeColor: string | null;
+  name: string;
+  thumbnail: string | null;
+  themeColor: string;
   description: string;
 }
