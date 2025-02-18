@@ -3,6 +3,7 @@
 import { postProjectRequest } from "@/apis";
 import { ResponseDto } from "@/apis/response";
 import { PostProjectResponseDto } from "@/apis/response/project";
+import gsap from "gsap";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useRef, useState } from "react";
@@ -33,6 +34,24 @@ export default function ProjectWritePage() {
   const [resourcePreviews, setResourcePreviews] = useState<ResourcePreview[]>([]);
 
   const router = useRouter();
+
+  const onUploadButtonMouseEnterHandler = () => {
+    gsap.to("#preview-thumbnail-wrapper", { translateY: "1%", scaleY: 1.02, duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-thumbnail", { scaleX: 1.1, scaleY: 1.1 / 1.02, duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-button", { backgroundColor: "#ffffffff", scale: 1.03, duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-button-text", { color: "#1a1a1a", duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-button-icon", { top: "-1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
+    gsap.to("#preview-button-icon-second", { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
+  };
+
+  const onUploadButtonMouseLeaveHandler = () => {
+    gsap.to("#preview-thumbnail-wrapper", { translateY: 0, scaleY: 1, duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-thumbnail", { scale: 1, duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-button", { backgroundColor: "#00000000", scale: 1, duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-button-text", { color: "#ffffff", duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-button-icon", { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
+    gsap.to("#preview-button-icon-second", { top: "1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
+  };
 
   const onApiKeyChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setApiKey(event.target.value);
@@ -89,6 +108,11 @@ export default function ProjectWritePage() {
     }
   };
 
+  const onRemoveThumbnailButtonClickHandler = () => {
+    setThumbnailPreview(undefined);
+    setThumbnailFile(undefined);
+  };
+
   const onRemoveResourceButtonClickHandler = (index: number) => {
     const newResourceFiles = [...resourceFiles];
     const newResourcePreviews = [...resourcePreviews];
@@ -134,22 +158,34 @@ export default function ProjectWritePage() {
       <div className={styles["main"]}>
         <div className={styles["main-top"]}>
           <div className={styles["main-top-left"]}>
-            <label htmlFor="api-key-input">api key</label>
+            <label className={styles["main-top-left-label"]} htmlFor="api-key-input">
+              api key
+            </label>
             <input id="api-key-input" type="password" value={apiKey} onChange={onApiKeyChangeHandler} />
-            <label htmlFor="id-input">id</label>
+            <label className={styles["main-top-left-label"]} htmlFor="id-input">
+              id
+            </label>
             <input id="id-input" type="text" value={id} onChange={onIdChangeHandler} />
-            <label htmlFor="name-input">name</label>
+            <label className={styles["main-top-left-label"]} htmlFor="name-input">
+              name
+            </label>
             <input id="name-input" type="text" value={name} onChange={onNameChangeHandler} />
-            <label htmlFor="description-input">description</label>
+            <label className={styles["main-top-left-label"]} htmlFor="description-input">
+              description
+            </label>
             <input id="description-input" type="text" value={description} onChange={onDescriptionChangeHandler} />
-            <label htmlFor="theme-color-input">theme color</label>
-            <input id="theme-color-input" type="color" value={themeColor} onChange={onThemeColorChangeHandler} />
+            <div className={styles["theme-color-input-container"]}>
+              <label className={styles["main-top-left-label-theme-color"]} htmlFor="theme-color-input">
+                theme color
+              </label>
+              <input id="theme-color-input" type="color" value={themeColor} onChange={onThemeColorChangeHandler} />
+            </div>
           </div>
           <div className={styles["main-top-right"]}>
             <h3>preview / upload</h3>
             <div className={styles["preview-container"]} style={{ background: themeColor }}>
               <div className={styles["preview-info-box"]}>
-                <div className={styles["preview-thumbnail-wrapper"]}>
+                <div className={styles["preview-thumbnail-wrapper"]} id="preview-thumbnail-wrapper">
                   <label htmlFor="thumbnail-input" className={styles["preview-thumbnail-label"]}>
                     <Image
                       src={`${thumbnailPreview ? thumbnailPreview : "/resources/default-thumbnail.png"}`}
@@ -157,8 +193,14 @@ export default function ProjectWritePage() {
                       width={1600}
                       height={1200}
                       className={styles["preview-thumbnail"]}
+                      id="preview-thumbnail"
                     />
                   </label>
+                  {thumbnailFile && (
+                    <div className={styles["preview-thumbnail-remove-icon"]} onClick={onRemoveThumbnailButtonClickHandler}>
+                      <CiCircleRemove />
+                    </div>
+                  )}
                   <input id="thumbnail-input" type="file" accept="image/*" style={{ display: "none" }} onChange={onThumbnailChangeHandler} />
                 </div>
                 <div className={styles["preview-info"]}>
@@ -167,11 +209,21 @@ export default function ProjectWritePage() {
                 </div>
               </div>
               <div className={styles["preview-button-container"]}>
-                <button className={styles["preview-button"]} onClick={onUploadButtonClickHandler}>
-                  <p className={styles["preview-button-text"]}>upload project</p>
+                <button
+                  className={styles["preview-button"]}
+                  id="preview-button"
+                  onClick={onUploadButtonClickHandler}
+                  onMouseEnter={onUploadButtonMouseEnterHandler}
+                  onTouchStart={onUploadButtonMouseEnterHandler}
+                  onMouseLeave={onUploadButtonMouseLeaveHandler}
+                  onTouchEnd={onUploadButtonMouseLeaveHandler}
+                >
+                  <p className={styles["preview-button-text"]} id="preview-button-text">
+                    upload project
+                  </p>
                   <div className={styles["preview-button-icon-wrapper"]}>
-                    <GoArrowUpRight className={styles["preview-button-icon"]} />
-                    <GoArrowUpRight className={styles["preview-button-icon-second"]} />
+                    <GoArrowUpRight className={styles["preview-button-icon"]} id="preview-button-icon" />
+                    <GoArrowUpRight className={styles["preview-button-icon-second"]} id="preview-button-icon-second" />
                   </div>
                 </button>
               </div>
@@ -181,7 +233,9 @@ export default function ProjectWritePage() {
         <hr className={styles["hr"]} />
         <div className={styles["main-bottom"]}>
           <div className={styles["main-bottom-left"]}>
-            <label htmlFor="content-textarea">content</label>
+            <label className={styles["main-bottom-left-label"]} htmlFor="content-textarea">
+              content
+            </label>
             <textarea ref={contentRef} id="content-textarea" rows={20} value={content} onChange={onContentChangeHandler} />
           </div>
           <div className={styles["main-bottom-right"]}>

@@ -25,15 +25,6 @@
   display: flex;
   flex-direction: column;
 
-  & label {
-    margin-bottom: 1.25rem;
-
-    font-size: 3.863rem;
-    font-weight: 300;
-    line-height: 110%;
-    letter-spacing: -0.05em;
-  }
-
   & input[type="password"],
   & input[type="text"] {
     margin-bottom: 3rem;
@@ -48,8 +39,16 @@
     letter-spacing: -0.01em;
   }
 
-  & input {
-    margin-bottom: 3rem;
+  & input[type="color"] {
+    border: none;
+    width: 3rem;
+    height: 3rem;
+    background-color: transparent;
+
+    &::-webkit-color-swatch {
+      border-radius: 50%;
+      border: none;
+    }
   }
 
   & textarea {
@@ -63,6 +62,30 @@
     line-height: 110%;
     letter-spacing: -0.01em;
   }
+}
+
+.main-top-left-label {
+  margin-bottom: 1.25rem;
+
+  font-size: 3.863rem;
+  font-weight: 300;
+  line-height: 110%;
+  letter-spacing: -0.05em;
+}
+
+.theme-color-input-container {
+  margin-bottom: 1.25rem;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.main-top-left-label-theme-color {
+  font-size: 3.863rem;
+  font-weight: 300;
+  line-height: 110%;
+  letter-spacing: -0.05em;
 }
 
 .main-top-right,
@@ -100,6 +123,7 @@
 .preview-thumbnail-wrapper {
   border-radius: 2.5rem;
   overflow: hidden;
+  position: relative;
 }
 
 .preview-thumbnail-label {
@@ -112,6 +136,30 @@
 
   display: block;
   user-select: none;
+}
+
+.preview-thumbnail-remove-icon {
+  border-radius: 50%;
+
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  background-color: rgba(0, 0, 0, 0.3);
+
+  color: var(--white);
+  font-size: 1.476rem;
+  line-height: 0;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.35);
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
 }
 
 .preview-info {
@@ -195,6 +243,15 @@
   border: 0.05rem inset;
 }
 
+.main-bottom-left-label {
+  margin-bottom: 1.25rem;
+
+  font-size: 3.863rem;
+  font-weight: 300;
+  line-height: 110%;
+  letter-spacing: -0.05em;
+}
+
 .main-bottom-right-header {
   display: flex;
   align-items: baseline;
@@ -206,6 +263,8 @@
 
   font-size: 1.877rem;
   line-height: 0;
+
+  cursor: pointer;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.05);
@@ -235,6 +294,8 @@
 
   font-size: 1.476rem;
   line-height: 0;
+
+  cursor: pointer;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.05);
@@ -271,12 +332,6 @@
 
   .main-top-left,
   .main-bottom-left {
-    & label {
-      margin-bottom: calc(1.25rem * 0.875);
-
-      font-size: calc(3.863rem * 0.875);
-    }
-
     & input[type="password"],
     & input[type="text"] {
       margin-bottom: calc(3rem * 0.875);
@@ -287,8 +342,9 @@
       font-size: calc(1.877rem * 0.875);
     }
 
-    & input {
-      margin-bottom: calc(3rem * 0.875);
+    & input[type="color"] {
+      width: calc(3rem * 0.875);
+      height: calc(3rem * 0.875);
     }
 
     & textarea {
@@ -298,6 +354,22 @@
 
       font-size: calc(1.877rem * 0.875);
     }
+  }
+
+  .main-top-left-label {
+    margin-bottom: calc(1.25rem * 0.875);
+
+    font-size: calc(3.863rem * 0.875);
+  }
+
+  .theme-color-input-container {
+    margin-bottom: calc(1.25rem * 0.875);
+
+    gap: calc(1rem * 0.875);
+  }
+
+  .main-top-left-label-theme-color {
+    font-size: calc(3.863rem * 0.875);
   }
 
   .main-top-right,
@@ -316,6 +388,12 @@
   .hr {
     margin-bottom: calc(3rem * 0.875);
     border: calc(0.05rem * 0.875) inset;
+  }
+
+  .main-bottom-left-label {
+    margin-bottom: calc(1.25rem * 0.875);
+
+    font-size: calc(3.863rem * 0.875);
   }
 
   .main-bottom-right-header {
@@ -362,12 +440,6 @@
 
   .main-top-left,
   .main-bottom-left {
-    & label {
-      margin-bottom: calc(1.25rem * 0.75);
-
-      font-size: calc(3.863rem * 0.75);
-    }
-
     & input[type="password"],
     & input[type="text"] {
       margin-bottom: calc(3rem * 0.75);
@@ -378,8 +450,9 @@
       font-size: calc(1.877rem * 0.75);
     }
 
-    & input {
-      margin-bottom: calc(3rem * 0.75);
+    & input[type="color"] {
+      width: calc(3rem * 0.75);
+      height: calc(3rem * 0.75);
     }
 
     & textarea {
@@ -389,6 +462,22 @@
 
       font-size: calc(1.877rem * 0.75);
     }
+  }
+
+  .main-top-left-label {
+    margin-bottom: calc(1.25rem * 0.75);
+
+    font-size: calc(3.863rem * 0.75);
+  }
+
+  .theme-color-input-container {
+    margin-bottom: calc(1.25rem * 0.75);
+
+    gap: calc(1rem * 0.75);
+  }
+
+  .main-top-left-label-theme-color {
+    font-size: calc(3.863rem * 0.75);
   }
 
   .main-top-right,
@@ -407,6 +496,12 @@
   .hr {
     margin-bottom: calc(3rem * 0.75);
     border: calc(0.05rem * 0.75) inset;
+  }
+
+  .main-bottom-left-label {
+    margin-bottom: calc(1.25rem * 0.75);
+
+    font-size: calc(3.863rem * 0.75);
   }
 
   .main-bottom-right-header {
@@ -454,12 +549,6 @@
 
   .main-top-left,
   .main-bottom-left {
-    & label {
-      margin-bottom: calc(1.25rem * 0.625);
-
-      font-size: calc(3.863rem * 0.625);
-    }
-
     & input[type="password"],
     & input[type="text"] {
       margin-bottom: calc(3rem * 0.625);
@@ -470,8 +559,9 @@
       font-size: calc(1.877rem * 0.625);
     }
 
-    & input {
-      margin-bottom: calc(3rem * 0.625);
+    & input[type="color"] {
+      width: calc(3rem * 0.625);
+      height: calc(3rem * 0.625);
     }
 
     & textarea {
@@ -481,6 +571,22 @@
 
       font-size: calc(1.877rem * 0.625);
     }
+  }
+
+  .main-top-left-label {
+    margin-bottom: calc(1.25rem * 0.625);
+
+    font-size: calc(3.863rem * 0.625);
+  }
+
+  .theme-color-input-container {
+    margin-bottom: 0;
+
+    gap: calc(1rem * 0.625);
+  }
+
+  .main-top-left-label-theme-color {
+    font-size: calc(3.863rem * 0.625);
   }
 
   .main-top-right,
@@ -499,6 +605,12 @@
   .hr {
     margin-bottom: calc(3rem * 0.625);
     border: calc(0.05rem * 0.625) inset;
+  }
+
+  .main-bottom-left-label {
+    margin-bottom: calc(1.25rem * 0.625);
+
+    font-size: calc(3.863rem * 0.625);
   }
 
   .main-bottom-right-header {
@@ -542,12 +654,6 @@
 
   .main-top-left,
   .main-bottom-left {
-    & label {
-      margin-bottom: calc(1.25rem * 0.5625);
-
-      font-size: calc(3.863rem * 0.5625);
-    }
-
     & input[type="password"],
     & input[type="text"] {
       margin-bottom: calc(3rem * 0.5625);
@@ -558,8 +664,9 @@
       font-size: calc(1.877rem * 0.5625);
     }
 
-    & input {
-      margin-bottom: calc(3rem * 0.5625);
+    & input[type="color"] {
+      width: calc(3rem * 0.5625);
+      height: calc(3rem * 0.5625);
     }
 
     & textarea {
@@ -569,6 +676,20 @@
 
       font-size: calc(1.877rem * 0.5625);
     }
+  }
+
+  .main-top-left-label {
+    margin-bottom: calc(1.25rem * 0.5625);
+
+    font-size: calc(3.863rem * 0.5625);
+  }
+
+  .theme-color-input-container {
+    gap: calc(1rem * 0.5625);
+  }
+
+  .main-top-left-label-theme-color {
+    font-size: calc(3.863rem * 0.5625);
   }
 
   .main-top-right,
@@ -587,6 +708,12 @@
   .hr {
     margin-bottom: calc(3rem * 0.5625);
     border: calc(0.05rem * 0.5625) inset;
+  }
+
+  .main-bottom-left-label {
+    margin-bottom: calc(1.25rem * 0.5625);
+
+    font-size: calc(3.863rem * 0.5625);
   }
 
   .main-bottom-right-header {
