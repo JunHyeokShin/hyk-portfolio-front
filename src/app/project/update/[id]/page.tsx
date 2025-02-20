@@ -1,23 +1,25 @@
 "use client";
 
-import { postProjectRequest } from "@/apis";
+import { getProjectRequest, putProjectRequest } from "@/apis";
 import { ResponseDto } from "@/apis/response";
-import { PostProjectResponseDto } from "@/apis/response/project";
+import { GetProjectResponseDto, PutProjectResponseDto } from "@/apis/response/project";
+import styles from "@/app/project/write/page.module.css";
 import { ResourceListItem } from "@/types/interface";
+import { convertUrlToFile } from "@/utils";
 import gsap from "gsap";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { CiCirclePlus, CiCircleRemove } from "react-icons/ci";
 import { GoArrowUpRight } from "react-icons/go";
-import styles from "./page.module.css";
 
-export default function ProjectWritePage() {
+export default function ProjectUpdatePage() {
+  const { id } = useParams<{ id: string }>();
+
   const contentRef = useRef<HTMLTextAreaElement>(null);
   const hiddenContentRef = useRef<HTMLTextAreaElement>(null);
 
   const [apiKey, setApiKey] = useState<string>("");
-  const [id, setId] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [themeColor, setThemeColor] = useState<string>("#3E444D");
@@ -32,7 +34,7 @@ export default function ProjectWritePage() {
 
   const router = useRouter();
 
-  const onUploadButtonMouseEnterHandler = () => {
+  const onUpdateButtonMouseEnterHandler = () => {
     gsap.to("#preview-thumbnail-wrapper", { translateY: "1%", scaleY: 1.02, duration: 0.5, ease: "power2.out" });
     gsap.to("#preview-thumbnail", { scaleX: 1.1, scaleY: 1.1 / 1.02, duration: 0.5, ease: "power2.out" });
     gsap.to("#preview-button", { backgroundColor: "#ffffffff", scale: 1.03, duration: 0.5, ease: "power2.out" });
@@ -41,7 +43,7 @@ export default function ProjectWritePage() {
     gsap.to("#preview-button-icon-second", { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
   };
 
-  const onUploadButtonMouseLeaveHandler = () => {
+  const onUpdateButtonMouseLeaveHandler = () => {
     gsap.to("#preview-thumbnail-wrapper", { translateY: 0, scaleY: 1, duration: 0.5, ease: "power2.out" });
     gsap.to("#preview-thumbnail", { scale: 1, duration: 0.5, ease: "power2.out" });
     gsap.to("#preview-button", { backgroundColor: "#00000000", scale: 1, duration: 0.5, ease: "power2.out" });
@@ -52,10 +54,6 @@ export default function ProjectWritePage() {
 
   const onApiKeyChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setApiKey(event.target.value);
-  };
-
-  const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setId(event.target.value);
   };
 
   const onNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -111,24 +109,23 @@ export default function ProjectWritePage() {
     setResourcePreviews(newResourcePreviews);
   };
 
-  const postProjectResponse = (responseBody: PostProjectResponseDto | ResponseDto | null) => {
+  const putProjectResponse = (responseBody: PutProjectResponseDto | ResponseDto | null) => {
     if (!responseBody) return false;
     const { code } = responseBody;
     if (code === "AF") alert("인증 실패");
     if (code === "VF") alert("유효성 검사 에러");
-    if (code === "DI") alert("중복되는 프로젝트 식별자");
+    if (code === "NEP") alert("존재하지 않는 프로젝트");
     if (code === "EF") alert("비어있는 파일");
     if (code === "FSE") alert("파일 저장 에러");
     if (code === "DBE") alert("데이터베이스 에러");
     if (code !== "SU") return;
 
-    alert("프로젝트를 성공적으로 등록하였습니다.");
+    alert("프로젝트를 성공적으로 수정하였습니다.");
     router.push(`/project/detail/${id}`);
   };
 
-  const onUploadButtonClickHandler = () => {
+  const onUpdateButtonClickHandler = () => {
     const data: FormData = new FormData();
-    data.append("id", id);
     data.append("name", name);
     data.append("themeColor", themeColor);
     data.append("description", description);
@@ -138,8 +135,37 @@ export default function ProjectWritePage() {
       data.append("resourceFiles", resourceFile);
     }
 
-    postProjectRequest(data, apiKey).then(postProjectResponse);
+    putProjectRequest(id, data, apiKey).then(putProjectResponse);
   };
+
+  const getProjectResponse = (responseBody: GetProjectResponseDto | ResponseDto | null) => {
+    if (!responseBody) return;
+    const { code } = responseBody;
+    if (code === "NEP") alert("존재하지 않는 게시물");
+    if (code === "DBE") alert("데이터베이스 에러");
+    if (code !== "SU") {
+      router.push(`/`);
+      return;
+    }
+
+    const { id, name, thumbnail, themeColor, description, content, resourceList } = responseBody as GetProjectResponseDto;
+    setName(name);
+    setThemeColor(themeColor);
+    setDescription(description);
+    setContent(content);
+    if (thumbnail) {
+      setThumbnailPreview(thumbnail);
+      convertUrlToFile(thumbnail).then((thumbnailFile) => setThumbnailFile(thumbnailFile));
+    }
+    setResourcePreviews(resourceList);
+    resourceList.map((resource) => {
+      convertUrlToFile(resource.url).then((resourceFile) => setResourceFiles((prev) => [...prev, resourceFile]));
+    });
+  };
+
+  useEffect(() => {
+    getProjectRequest(id).then(getProjectResponse);
+  }, [id]);
 
   useEffect(() => {
     if (!contentRef.current || !hiddenContentRef.current) return;
@@ -149,7 +175,7 @@ export default function ProjectWritePage() {
 
   return (
     <div className={styles["container"]}>
-      <h1 className={styles["header"]}>project upload</h1>
+      <h1 className={styles["header"]}>project update</h1>
       <div className={styles["main"]}>
         <div className={styles["main-top"]}>
           <div className={styles["main-top-left"]}>
@@ -160,7 +186,7 @@ export default function ProjectWritePage() {
             <label className={styles["main-top-left-label"]} htmlFor="id-input">
               id
             </label>
-            <input id="id-input" type="text" placeholder="128 letters or less" value={id} onChange={onIdChangeHandler} />
+            <input id="id-input" type="text" value={id} disabled />
             <label className={styles["main-top-left-label"]} htmlFor="name-input">
               name
             </label>
@@ -177,7 +203,7 @@ export default function ProjectWritePage() {
             </div>
           </div>
           <div className={styles["main-top-right"]}>
-            <h3>preview / upload</h3>
+            <h3>preview / update</h3>
             <div className={styles["preview-container"]} style={{ background: themeColor }}>
               <div className={styles["preview-info-box"]}>
                 <div className={styles["preview-thumbnail-wrapper"]} id="preview-thumbnail-wrapper">
@@ -207,14 +233,14 @@ export default function ProjectWritePage() {
                 <button
                   className={styles["preview-button"]}
                   id="preview-button"
-                  onClick={onUploadButtonClickHandler}
-                  onMouseEnter={onUploadButtonMouseEnterHandler}
-                  onTouchStart={onUploadButtonMouseEnterHandler}
-                  onMouseLeave={onUploadButtonMouseLeaveHandler}
-                  onTouchEnd={onUploadButtonMouseLeaveHandler}
+                  onClick={onUpdateButtonClickHandler}
+                  onMouseEnter={onUpdateButtonMouseEnterHandler}
+                  onTouchStart={onUpdateButtonMouseEnterHandler}
+                  onMouseLeave={onUpdateButtonMouseLeaveHandler}
+                  onTouchEnd={onUpdateButtonMouseLeaveHandler}
                 >
                   <p className={styles["preview-button-text"]} id="preview-button-text">
-                    upload project
+                    upate project
                   </p>
                   <div className={styles["preview-button-icon-wrapper"]}>
                     <GoArrowUpRight className={styles["preview-button-icon"]} id="preview-button-icon" />

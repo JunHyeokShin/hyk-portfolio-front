@@ -45,7 +45,7 @@ export default function ProjectCard({ project }: Props) {
 
   return (
     <Link
-      href={`/project/${project.id}`}
+      href={`/project/detail/${project.id}`}
       className={styles["project-container"]}
       style={{ background: project.themeColor }}
       id={project.id}

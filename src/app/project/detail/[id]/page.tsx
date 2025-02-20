@@ -17,7 +17,7 @@ function getProjectContentResponse(responseBody: GetProjectContentResponseDto | 
   return { code, content };
 }
 
-export default async function ProjectPage({ params }: Params) {
+export default async function ProjectDetailPage({ params }: Params) {
   const id = (await params).id;
   const { code, content } = await getProjectContentRequest(id).then(getProjectContentResponse);
 
