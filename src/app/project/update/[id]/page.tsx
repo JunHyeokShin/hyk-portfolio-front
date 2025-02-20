@@ -148,7 +148,7 @@ export default function ProjectUpdatePage() {
       return;
     }
 
-    const { id, name, thumbnail, themeColor, description, content, resourceList } = responseBody as GetProjectResponseDto;
+    const { name, thumbnail, themeColor, description, content, resourceList } = responseBody as GetProjectResponseDto;
     setName(name);
     setThemeColor(themeColor);
     setDescription(description);
@@ -157,9 +157,11 @@ export default function ProjectUpdatePage() {
       setThumbnailPreview(thumbnail);
       convertUrlToFile(thumbnail).then((thumbnailFile) => setThumbnailFile(thumbnailFile));
     }
-    setResourcePreviews(resourceList);
     resourceList.map((resource) => {
-      convertUrlToFile(resource.url).then((resourceFile) => setResourceFiles((prev) => [...prev, resourceFile]));
+      convertUrlToFile(resource.url).then((resourceFile) => {
+        setResourcePreviews((prev) => [...prev, resource]);
+        setResourceFiles((prev) => [...prev, resourceFile]);
+      });
     });
   };
 
