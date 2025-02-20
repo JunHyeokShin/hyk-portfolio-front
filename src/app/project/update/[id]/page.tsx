@@ -1,9 +1,9 @@
 "use client";
 
-import { getProjectRequest, putProjectRequest } from "@/apis";
+import { deleteProjectRequest, getProjectRequest, putProjectRequest } from "@/apis";
 import { ResponseDto } from "@/apis/response";
-import { GetProjectResponseDto, PutProjectResponseDto } from "@/apis/response/project";
-import styles from "@/app/project/write/page.module.css";
+import { DeleteProjectResponseDto, GetProjectResponseDto, PutProjectResponseDto } from "@/apis/response/project";
+import styles from "./page.module.css";
 import { ResourceListItem } from "@/types/interface";
 import { convertUrlToFile } from "@/utils";
 import gsap from "gsap";
@@ -37,19 +37,37 @@ export default function ProjectUpdatePage() {
   const onUpdateButtonMouseEnterHandler = () => {
     gsap.to("#preview-thumbnail-wrapper", { translateY: "1%", scaleY: 1.02, duration: 0.5, ease: "power2.out" });
     gsap.to("#preview-thumbnail", { scaleX: 1.1, scaleY: 1.1 / 1.02, duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-button", { backgroundColor: "#ffffffff", scale: 1.03, duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-button-text", { color: "#1a1a1a", duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-button-icon", { top: "-1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
-    gsap.to("#preview-button-icon-second", { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
+    gsap.to("#preview-update-button", { backgroundColor: "#ffffffff", scale: 1.03, duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-update-button-text", { color: "#1a1a1a", duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-update-button-icon", { top: "-1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
+    gsap.to("#preview-update-button-icon-second", { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
   };
 
   const onUpdateButtonMouseLeaveHandler = () => {
     gsap.to("#preview-thumbnail-wrapper", { translateY: 0, scaleY: 1, duration: 0.5, ease: "power2.out" });
     gsap.to("#preview-thumbnail", { scale: 1, duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-button", { backgroundColor: "#00000000", scale: 1, duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-button-text", { color: "#ffffff", duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-button-icon", { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
-    gsap.to("#preview-button-icon-second", { top: "1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
+    gsap.to("#preview-update-button", { backgroundColor: "#00000000", scale: 1, duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-update-button-text", { color: "#ffffff", duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-update-button-icon", { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
+    gsap.to("#preview-update-button-icon-second", { top: "1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
+  };
+
+  const onDeleteButtonMouseEnterHandler = () => {
+    gsap.to("#preview-thumbnail-wrapper", { translateY: "1%", scaleY: 1.02, duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-thumbnail", { scaleX: 1.1, scaleY: 1.1 / 1.02, duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-delete-button", { backgroundColor: "#ffffffff", scale: 1.03, duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-delete-button-text", { color: "#1a1a1a", duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-delete-button-icon", { top: "-1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
+    gsap.to("#preview-delete-button-icon-second", { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
+  };
+
+  const onDeleteButtonMouseLeaveHandler = () => {
+    gsap.to("#preview-thumbnail-wrapper", { translateY: 0, scaleY: 1, duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-thumbnail", { scale: 1, duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-delete-button", { backgroundColor: "#00000000", scale: 1, duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-delete-button-text", { color: "#ffffff", duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-delete-button-icon", { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
+    gsap.to("#preview-delete-button-icon-second", { top: "1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
   };
 
   const onApiKeyChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -124,6 +142,18 @@ export default function ProjectUpdatePage() {
     router.push(`/project/detail/${id}`);
   };
 
+  const deleteProjectResponse = (responseBody: DeleteProjectResponseDto | ResponseDto | null) => {
+    if (!responseBody) return false;
+    const { code } = responseBody;
+    if (code === "AF") alert("인증 실패");
+    if (code === "NEP") alert("존재하지 않는 프로젝트");
+    if (code === "DBE") alert("데이터베이스 에러");
+    if (code !== "SU") return;
+
+    alert("프로젝트를 성공적으로 삭제하였습니다.");
+    router.push(`/`);
+  };
+
   const onUpdateButtonClickHandler = () => {
     const data: FormData = new FormData();
     data.append("name", name);
@@ -136,6 +166,10 @@ export default function ProjectUpdatePage() {
     }
 
     putProjectRequest(id, data, apiKey).then(putProjectResponse);
+  };
+
+  const onDeleteButtonClickHandler = () => {
+    deleteProjectRequest(id, apiKey).then(deleteProjectResponse);
   };
 
   const getProjectResponse = (responseBody: GetProjectResponseDto | ResponseDto | null) => {
@@ -234,19 +268,36 @@ export default function ProjectUpdatePage() {
               <div className={styles["preview-button-container"]}>
                 <button
                   className={styles["preview-button"]}
-                  id="preview-button"
+                  id="preview-update-button"
                   onClick={onUpdateButtonClickHandler}
                   onMouseEnter={onUpdateButtonMouseEnterHandler}
                   onTouchStart={onUpdateButtonMouseEnterHandler}
                   onMouseLeave={onUpdateButtonMouseLeaveHandler}
                   onTouchEnd={onUpdateButtonMouseLeaveHandler}
                 >
-                  <p className={styles["preview-button-text"]} id="preview-button-text">
+                  <p className={styles["preview-button-text"]} id="preview-update-button-text">
                     upate project
                   </p>
                   <div className={styles["preview-button-icon-wrapper"]}>
-                    <GoArrowUpRight className={styles["preview-button-icon"]} id="preview-button-icon" />
-                    <GoArrowUpRight className={styles["preview-button-icon-second"]} id="preview-button-icon-second" />
+                    <GoArrowUpRight className={styles["preview-button-icon"]} id="preview-update-button-icon" />
+                    <GoArrowUpRight className={styles["preview-button-icon-second"]} id="preview-update-button-icon-second" />
+                  </div>
+                </button>
+                <button
+                  className={styles["preview-button"]}
+                  id="preview-delete-button"
+                  onClick={onDeleteButtonClickHandler}
+                  onMouseEnter={onDeleteButtonMouseEnterHandler}
+                  onTouchStart={onDeleteButtonMouseEnterHandler}
+                  onMouseLeave={onDeleteButtonMouseLeaveHandler}
+                  onTouchEnd={onDeleteButtonMouseLeaveHandler}
+                >
+                  <p className={styles["preview-button-text"]} id="preview-delete-button-text">
+                    delete project
+                  </p>
+                  <div className={styles["preview-button-icon-wrapper"]}>
+                    <GoArrowUpRight className={styles["preview-button-icon"]} id="preview-delete-button-icon" />
+                    <GoArrowUpRight className={styles["preview-button-icon-second"]} id="preview-delete-button-icon-second" />
                   </div>
                 </button>
               </div>

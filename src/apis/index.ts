@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ResponseDto } from "./response";
 import {
+  DeleteProjectResponseDto,
   GetProjectContentResponseDto,
   GetProjectListResponseDto,
   GetProjectResponseDto,
@@ -28,6 +29,7 @@ const GET_PROJECT_URL = (id: string) => `${API_DOMAIN}/project/${id}`;
 const GET_PROJECT_CONTENT_URL = (id: string) => `${API_DOMAIN}/project/${id}/content`;
 const POST_PROJECT_URL = () => `${API_DOMAIN}/project`;
 const PUT_PROJECT_URL = (id: string) => `${API_DOMAIN}/project/${id}`;
+const DELETE_PROJECT_URL = (id: string) => `${API_DOMAIN}/project/${id}`;
 
 export const getProjectListRequest = async () => {
   const result = await axios
@@ -94,6 +96,21 @@ export const putProjectRequest = async (id: string, data: FormData, apiKey: stri
     .put(PUT_PROJECT_URL(id), data, createHeaders({ apiKey }))
     .then((response) => {
       const responseBody: PutProjectResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      if (!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+export const deleteProjectRequest = async (id: string, apiKey: string) => {
+  const result = await axios
+    .delete(DELETE_PROJECT_URL(id), createHeaders({ apiKey }))
+    .then((response) => {
+      const responseBody: DeleteProjectResponseDto = response.data;
       return responseBody;
     })
     .catch((error) => {
