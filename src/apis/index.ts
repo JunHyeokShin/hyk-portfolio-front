@@ -8,6 +8,14 @@ import {
   PostProjectResponseDto,
   PutProjectResponseDto,
 } from "./response/project";
+import {
+  DeletePostResponseDto,
+  GetPostContentResponseDto,
+  GetPostListResponseDto,
+  GetPostResponseDto,
+  PostPostResponseDto,
+  PutPostResponseDto,
+} from "./response/post";
 
 const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN;
 const API_DOMAIN = `${DOMAIN}/api/v1`;
@@ -111,6 +119,103 @@ export const deleteProjectRequest = async (id: string, apiKey: string) => {
     .delete(DELETE_PROJECT_URL(id), createHeaders({ apiKey }))
     .then((response) => {
       const responseBody: DeleteProjectResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      if (!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+const GET_POST_LIST_URL = () => `${API_DOMAIN}/post`;
+const GET_POST_URL = (id: number) => `${API_DOMAIN}/post/${id}`;
+const GET_POST_CONTENT_URL = (id: number) => `${API_DOMAIN}/post/${id}/content`;
+const POST_POST_URL = () => `${API_DOMAIN}/post`;
+const PUT_POST_URL = (id: number) => `${API_DOMAIN}/post/${id}`;
+const DELETE_POST_URL = (id: number) => `${API_DOMAIN}/post/${id}`;
+
+export const getPostListRequest = async () => {
+  const result = await axios
+    .get(GET_POST_LIST_URL(), { adapter: "fetch", fetchOptions: { cache: "no-store" } })
+    .then((response) => {
+      const responseBody: GetPostListResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      if (!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+export const getPostRequest = async (id: number) => {
+  const result = await axios
+    .get(GET_POST_URL(id))
+    .then((response) => {
+      const responseBody: GetPostResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      if (!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+export const getPostContentRequest = async (id: number) => {
+  const result = await axios
+    .get(GET_POST_CONTENT_URL(id))
+    .then((response) => {
+      const resopnseBody: GetPostContentResponseDto = response.data;
+      return resopnseBody;
+    })
+    .catch((error) => {
+      if (!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+export const postPostRequest = async (data: FormData, apiKey: string) => {
+  const result = await axios
+    .post(POST_POST_URL(), data, createHeaders({ apiKey }))
+    .then((response) => {
+      const responseBody: PostPostResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      if (!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+export const putPostRequest = async (id: number, data: FormData, apiKey: string) => {
+  const result = await axios
+    .put(PUT_POST_URL(id), data, createHeaders({ apiKey }))
+    .then((response) => {
+      const responseBody: PutPostResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      if (!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+export const deletePostRequest = async (id: number, apiKey: string) => {
+  const result = await axios
+    .delete(DELETE_POST_URL(id), createHeaders({ apiKey }))
+    .then((response) => {
+      const responseBody: DeletePostResponseDto = response.data;
       return responseBody;
     })
     .catch((error) => {
