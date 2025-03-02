@@ -31,7 +31,7 @@
     padding: 0.25rem;
 
     border-radius: 0.5rem;
-    outline: solid 1px var(--gray);
+    outline: solid 1px var(--gray-400);
 
     font-size: 1.877rem;
     font-weight: 300;
@@ -55,7 +55,7 @@
     padding: 0.25rem;
 
     border-radius: 0.5rem;
-    outline: solid 1px var(--gray);
+    outline: solid 1px var(--gray-400);
 
     font-size: 1.877rem;
     font-weight: 300;
@@ -280,7 +280,7 @@
 
 .resource-preview-image {
   border-radius: 0.5rem;
-  outline: solid 1px var(--gray);
+  outline: solid 1px var(--gray-400);
 
   max-width: 100%;
   height: auto;

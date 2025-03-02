@@ -1,9 +1,35 @@
+import { getPostContentRequest } from "@/apis";
+import { ResponseDto } from "@/apis/response";
+import { GetPostContentResponseDto } from "@/apis/response/post";
+import MDX from "@/components/MDX";
 import styles from "./page.module.css";
 
 interface Params {
   params: Promise<{ id: string }>;
 }
 
-export default function PostDetailPage({ params }: Params) {
-  return <div>PostDetailPage</div>;
+function getPostContentResponse(responseBody: GetPostContentResponseDto | ResponseDto | null) {
+  if (!responseBody) return { code: undefined, content: undefined };
+  const { code } = responseBody;
+  if (code !== "SU") return { code, content: undefined };
+
+  const { tags, content } = responseBody as GetPostContentResponseDto;
+  return { code, tags, content };
+}
+
+export default async function PostDetailPage({ params }: Params) {
+  const id = parseInt((await params).id);
+  const { code, tags, content } = await getPostContentRequest(id).then(getPostContentResponse);
+
+  return (
+    <>
+      {code === "SU" ? (
+        <MDX content={content} />
+      ) : code === "NEP" ? (
+        <p className={styles["not-loading"]}>존재하지 않는 게시물입니다.</p>
+      ) : (
+        <p className={styles["not-loading"]}>내용을 불러올 수 없습니다.</p>
+      )}
+    </>
+  );
 }

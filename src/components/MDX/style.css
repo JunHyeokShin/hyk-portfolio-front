@@ -28,7 +28,7 @@
   & td {
     border-width: 1px;
     border-style: solid;
-    border-color: var(--gray);
+    border-color: var(--gray-400);
     padding: 0.25rem 0.5rem;
 
     font-size: 1.877rem;
@@ -37,7 +37,7 @@
   }
 
   & th {
-    background-color: var(--gray-light);
+    background-color: var(--gray-100);
 
     font-weight: 500;
   }
@@ -175,7 +175,7 @@
     margin: 0;
     border-width: 1px;
     border-style: solid;
-    border-color: var(--gray);
+    border-color: var(--gray-400);
     border-radius: 25%;
 
     position: relative;
@@ -192,7 +192,7 @@
       position: absolute;
       transform: translate(-15%, -60%);
 
-      color: var(--gray-dark);
+      color: var(--gray-600);
       font-family: var(--font-segoe-ui-symbol);
       font-size: 1.5rem;
 
