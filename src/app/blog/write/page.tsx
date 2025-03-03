@@ -1,27 +1,26 @@
 "use client";
 
-import { deleteProjectRequest, getProjectRequest, putProjectRequest } from "@/apis";
+import { getNextIdRequest, postPostRequest } from "@/apis";
 import { ResponseDto } from "@/apis/response";
-import { DeleteProjectResponseDto, GetProjectResponseDto, PutProjectResponseDto } from "@/apis/response/project";
-import styles from "./page.module.css";
+import { GetNextIdResponseDto, PostPostResponseDto } from "@/apis/response/post";
 import { ResourceListItem } from "@/types/interface";
-import { convertUrlToFile } from "@/utils";
 import gsap from "gsap";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { CiCirclePlus, CiCircleRemove } from "react-icons/ci";
 import { GoArrowUpRight } from "react-icons/go";
+import styles from "./page.module.css";
 
-export default function ProjectUpdatePage() {
-  const { id } = useParams<{ id: string }>();
-
+export default function PostWritePage() {
   const contentRef = useRef<HTMLTextAreaElement>(null);
   const hiddenContentRef = useRef<HTMLTextAreaElement>(null);
 
   const [apiKey, setApiKey] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
+  const [id, setId] = useState<number>();
+  const [title, setTitle] = useState<string>("");
+  const [tags, setTags] = useState<string>("");
+  const [tagArray, setTagArray] = useState<string[]>();
   const [themeColor, setThemeColor] = useState<string>("#3E444D");
 
   const [thumbnailFile, setThumbnailFile] = useState<File>();
@@ -34,52 +33,35 @@ export default function ProjectUpdatePage() {
 
   const router = useRouter();
 
-  const onUpdateButtonMouseEnterHandler = () => {
+  const onUploadButtonMouseEnterHandler = () => {
     gsap.to("#preview-thumbnail-wrapper", { translateY: "1%", scaleY: 1.02, duration: 0.5, ease: "power2.out" });
     gsap.to("#preview-thumbnail", { scaleX: 1.1, scaleY: 1.1 / 1.02, duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-update-button", { backgroundColor: "#ffffffff", scale: 1.03, duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-update-button-text", { color: "#1a1a1a", duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-update-button-icon", { top: "-1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
-    gsap.to("#preview-update-button-icon-second", { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
+    gsap.to("#preview-button", { backgroundColor: "#ffffffff", scale: 1.03, duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-button-text", { color: "#1a1a1a", duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-button-icon", { top: "-1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
+    gsap.to("#preview-button-icon-second", { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
   };
 
-  const onUpdateButtonMouseLeaveHandler = () => {
+  const onUploadButtonMouseLeaveHandler = () => {
     gsap.to("#preview-thumbnail-wrapper", { translateY: 0, scaleY: 1, duration: 0.5, ease: "power2.out" });
     gsap.to("#preview-thumbnail", { scale: 1, duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-update-button", { backgroundColor: "#00000000", scale: 1, duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-update-button-text", { color: "#ffffff", duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-update-button-icon", { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
-    gsap.to("#preview-update-button-icon-second", { top: "1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
-  };
-
-  const onDeleteButtonMouseEnterHandler = () => {
-    gsap.to("#preview-thumbnail-wrapper", { translateY: "1%", scaleY: 1.02, duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-thumbnail", { scaleX: 1.1, scaleY: 1.1 / 1.02, duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-delete-button", { backgroundColor: "#ffffffff", scale: 1.03, duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-delete-button-text", { color: "#1a1a1a", duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-delete-button-icon", { top: "-1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
-    gsap.to("#preview-delete-button-icon-second", { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
-  };
-
-  const onDeleteButtonMouseLeaveHandler = () => {
-    gsap.to("#preview-thumbnail-wrapper", { translateY: 0, scaleY: 1, duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-thumbnail", { scale: 1, duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-delete-button", { backgroundColor: "#00000000", scale: 1, duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-delete-button-text", { color: "#ffffff", duration: 0.5, ease: "power2.out" });
-    gsap.to("#preview-delete-button-icon", { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
-    gsap.to("#preview-delete-button-icon-second", { top: "1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
+    gsap.to("#preview-button", { backgroundColor: "#00000000", scale: 1, duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-button-text", { color: "#ffffff", duration: 0.5, ease: "power2.out" });
+    gsap.to("#preview-button-icon", { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
+    gsap.to("#preview-button-icon-second", { top: "1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
   };
 
   const onApiKeyChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setApiKey(event.target.value);
   };
 
-  const onNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
+  const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
   };
 
-  const onDescriptionChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setDescription(event.target.value);
+  const onTagsChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setTags(event.target.value);
+    setTagArray(event.target.value.split(",").map((tag) => tag.trim()));
   };
 
   const onThemeColorChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -127,84 +109,55 @@ export default function ProjectUpdatePage() {
     setResourcePreviews(newResourcePreviews);
   };
 
-  const putProjectResponse = (responseBody: PutProjectResponseDto | ResponseDto | null) => {
-    if (!responseBody) return;
+  const getNextIdResponse = (responseBody: GetNextIdResponseDto | ResponseDto | null) => {
+    if (!responseBody) {
+      router.push("/blog");
+      return;
+    }
+    const { code } = responseBody;
+    if (code === "DBE") alert("데이터베이스 에러");
+    if (code !== "SU") {
+      router.push("/blog");
+      return;
+    }
+
+    const { id } = responseBody as GetNextIdResponseDto;
+    setId(id);
+  };
+
+  const postPostResponse = (responseBody: PostPostResponseDto | ResponseDto | null) => {
+    if (!responseBody) return false;
     const { code } = responseBody;
     if (code === "AF") alert("인증 실패");
     if (code === "VF") alert("유효성 검사 에러");
-    if (code === "NEP") alert("존재하지 않는 프로젝트");
     if (code === "EF") alert("비어있는 파일");
     if (code === "FSE") alert("파일 저장 에러");
     if (code === "DBE") alert("데이터베이스 에러");
     if (code !== "SU") return;
 
-    alert("프로젝트를 성공적으로 수정하였습니다.");
-    router.push(`/project/detail/${id}`);
+    const { id } = responseBody as PostPostResponseDto;
+
+    alert("게시물을 성공적으로 업로드하였습니다.");
+    router.push(`/blog/detail/${id}`);
   };
 
-  const deleteProjectResponse = (responseBody: DeleteProjectResponseDto | ResponseDto | null) => {
-    if (!responseBody) return;
-    const { code } = responseBody;
-    if (code === "AF") alert("인증 실패");
-    if (code === "NEP") alert("존재하지 않는 프로젝트");
-    if (code === "DBE") alert("데이터베이스 에러");
-    if (code !== "SU") return;
-
-    alert("프로젝트를 성공적으로 삭제하였습니다.");
-    router.push("/");
-  };
-
-  const onUpdateButtonClickHandler = () => {
+  const onUploadButtonClickHandler = () => {
     const data: FormData = new FormData();
-    data.append("name", name);
+    data.append("title", title);
     data.append("themeColor", themeColor);
-    data.append("description", description);
+    data.append("tags", tags);
     data.append("content", content);
     if (thumbnailFile) data.append("thumbnailFile", thumbnailFile);
     for (const resourceFile of resourceFiles) {
       data.append("resourceFiles", resourceFile);
     }
 
-    putProjectRequest(id, data, apiKey).then(putProjectResponse);
-  };
-
-  const onDeleteButtonClickHandler = () => {
-    deleteProjectRequest(id, apiKey).then(deleteProjectResponse);
-  };
-
-  const getProjectResponse = (responseBody: GetProjectResponseDto | ResponseDto | null) => {
-    if (!responseBody) {
-      router.push("/");
-      return;
-    }
-    const { code } = responseBody;
-    if (code === "NEP") alert("존재하지 않는 프로젝트");
-    if (code === "DBE") alert("데이터베이스 에러");
-    if (code !== "SU") {
-      router.push("/");
-      return;
-    }
-
-    const { name, thumbnail, themeColor, description, content, resourceList } = responseBody as GetProjectResponseDto;
-    setName(name);
-    setThemeColor(themeColor);
-    setDescription(description);
-    setContent(content);
-    if (thumbnail) {
-      setThumbnailPreview(thumbnail);
-      convertUrlToFile(thumbnail).then((thumbnailFile) => setThumbnailFile(thumbnailFile));
-    }
-    resourceList.map((resource) => {
-      convertUrlToFile(resource.url).then((resourceFile) => {
-        setResourcePreviews((prev) => [...prev, resource]);
-        setResourceFiles((prev) => [...prev, resourceFile]);
-      });
-    });
+    postPostRequest(data, apiKey).then(postPostResponse);
   };
 
   useEffect(() => {
-    getProjectRequest(id).then(getProjectResponse);
-  }, [id]);
+    getNextIdRequest().then(getNextIdResponse);
+  }, []);
 
   useEffect(() => {
     if (!contentRef.current || !hiddenContentRef.current) return;
@@ -214,7 +167,7 @@ export default function ProjectUpdatePage() {
 
   return (
     <div className={styles["container"]}>
-      <h1 className={styles["header"]}>project update</h1>
+      <h1 className={styles["header"]}>post upload</h1>
       <div className={styles["main"]}>
         <div className={styles["main-top"]}>
           <div className={styles["main-top-left"]}>
@@ -223,15 +176,15 @@ export default function ProjectUpdatePage() {
             </label>
             <input id="api-key-input" type="password" value={apiKey} onChange={onApiKeyChangeHandler} />
             <label className={styles["main-top-left-label"]}>id</label>
-            <input type="text" value={id} disabled />
-            <label className={styles["main-top-left-label"]} htmlFor="name-input">
-              name
+            <input type="text" value={id ? id : "..."} disabled />
+            <label className={styles["main-top-left-label"]} htmlFor="title-input">
+              title
             </label>
-            <input id="name-input" type="text" value={name} onChange={onNameChangeHandler} />
-            <label className={styles["main-top-left-label"]} htmlFor="description-input">
-              description
+            <input id="title-input" type="text" value={title} onChange={onTitleChangeHandler} />
+            <label className={styles["main-top-left-label"]} htmlFor="tags-input">
+              tags
             </label>
-            <input id="description-input" type="text" value={description} onChange={onDescriptionChangeHandler} />
+            <input id="tags-input" type="text" value={tags} onChange={onTagsChangeHandler} />
             <div className={styles["theme-color-input-container"]}>
               <label className={styles["main-top-left-label-theme-color"]} htmlFor="theme-color-input">
                 theme color
@@ -240,7 +193,7 @@ export default function ProjectUpdatePage() {
             </div>
           </div>
           <div className={styles["main-top-right"]}>
-            <h3>preview / update</h3>
+            <h3>preview / upload</h3>
             <div className={styles["preview-container"]} style={{ background: themeColor }}>
               <div className={styles["preview-info-box"]}>
                 <div className={styles["preview-thumbnail-wrapper"]} id="preview-thumbnail-wrapper">
@@ -262,43 +215,32 @@ export default function ProjectUpdatePage() {
                   <input id="thumbnail-input" type="file" accept="image/*" style={{ display: "none" }} onChange={onThumbnailChangeHandler} />
                 </div>
                 <div className={styles["preview-info"]}>
-                  <input value={name} className={styles["preview-name"]} onChange={onNameChangeHandler} />
-                  <input value={description} className={styles["preview-description"]} onChange={onDescriptionChangeHandler} />
+                  <input value={title} className={styles["preview-title"]} onChange={onTitleChangeHandler} />
+                  <ul className={styles["preview-tags"]}>
+                    {tagArray?.map((tag) => (
+                      <li className={styles["preview-tag"]} key={tag}>
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
               <div className={styles["preview-button-container"]}>
                 <button
                   className={styles["preview-button"]}
-                  id="preview-update-button"
-                  onClick={onUpdateButtonClickHandler}
-                  onMouseEnter={onUpdateButtonMouseEnterHandler}
-                  onTouchStart={onUpdateButtonMouseEnterHandler}
-                  onMouseLeave={onUpdateButtonMouseLeaveHandler}
-                  onTouchEnd={onUpdateButtonMouseLeaveHandler}
+                  id="preview-button"
+                  onClick={onUploadButtonClickHandler}
+                  onMouseEnter={onUploadButtonMouseEnterHandler}
+                  onTouchStart={onUploadButtonMouseEnterHandler}
+                  onMouseLeave={onUploadButtonMouseLeaveHandler}
+                  onTouchEnd={onUploadButtonMouseLeaveHandler}
                 >
-                  <p className={styles["preview-button-text"]} id="preview-update-button-text">
-                    upate project
+                  <p className={styles["preview-button-text"]} id="preview-button-text">
+                    upload post
                   </p>
                   <div className={styles["preview-button-icon-wrapper"]}>
-                    <GoArrowUpRight className={styles["preview-button-icon"]} id="preview-update-button-icon" />
-                    <GoArrowUpRight className={styles["preview-button-icon-second"]} id="preview-update-button-icon-second" />
-                  </div>
-                </button>
-                <button
-                  className={styles["preview-button"]}
-                  id="preview-delete-button"
-                  onClick={onDeleteButtonClickHandler}
-                  onMouseEnter={onDeleteButtonMouseEnterHandler}
-                  onTouchStart={onDeleteButtonMouseEnterHandler}
-                  onMouseLeave={onDeleteButtonMouseLeaveHandler}
-                  onTouchEnd={onDeleteButtonMouseLeaveHandler}
-                >
-                  <p className={styles["preview-button-text"]} id="preview-delete-button-text">
-                    delete project
-                  </p>
-                  <div className={styles["preview-button-icon-wrapper"]}>
-                    <GoArrowUpRight className={styles["preview-button-icon"]} id="preview-delete-button-icon" />
-                    <GoArrowUpRight className={styles["preview-button-icon-second"]} id="preview-delete-button-icon-second" />
+                    <GoArrowUpRight className={styles["preview-button-icon"]} id="preview-button-icon" />
+                    <GoArrowUpRight className={styles["preview-button-icon-second"]} id="preview-button-icon-second" />
                   </div>
                 </button>
               </div>

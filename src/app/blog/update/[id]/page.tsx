@@ -1,9 +1,8 @@
 "use client";
 
-import { deleteProjectRequest, getProjectRequest, putProjectRequest } from "@/apis";
+import { deletePostRequest, getPostRequest, putPostRequest } from "@/apis";
 import { ResponseDto } from "@/apis/response";
-import { DeleteProjectResponseDto, GetProjectResponseDto, PutProjectResponseDto } from "@/apis/response/project";
-import styles from "./page.module.css";
+import { DeletePostResponseDto, GetPostResponseDto, PutPostResponseDto } from "@/apis/response/post";
 import { ResourceListItem } from "@/types/interface";
 import { convertUrlToFile } from "@/utils";
 import gsap from "gsap";
@@ -12,16 +11,18 @@ import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { CiCirclePlus, CiCircleRemove } from "react-icons/ci";
 import { GoArrowUpRight } from "react-icons/go";
+import styles from "./page.module.css";
 
-export default function ProjectUpdatePage() {
+export default function PostUpdatePage() {
   const { id } = useParams<{ id: string }>();
 
   const contentRef = useRef<HTMLTextAreaElement>(null);
   const hiddenContentRef = useRef<HTMLTextAreaElement>(null);
 
   const [apiKey, setApiKey] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
+  const [tags, setTags] = useState<string>("");
+  const [tagArray, setTagArray] = useState<string[]>();
   const [themeColor, setThemeColor] = useState<string>("#3E444D");
 
   const [thumbnailFile, setThumbnailFile] = useState<File>();
@@ -74,12 +75,13 @@ export default function ProjectUpdatePage() {
     setApiKey(event.target.value);
   };
 
-  const onNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
+  const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
   };
 
-  const onDescriptionChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setDescription(event.target.value);
+  const onTagsChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setTags(event.target.value);
+    setTagArray(event.target.value.split(",").map((tag) => tag.trim()));
   };
 
   const onThemeColorChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -127,68 +129,69 @@ export default function ProjectUpdatePage() {
     setResourcePreviews(newResourcePreviews);
   };
 
-  const putProjectResponse = (responseBody: PutProjectResponseDto | ResponseDto | null) => {
+  const putPostResponse = (responseBody: PutPostResponseDto | ResponseDto | null) => {
     if (!responseBody) return;
     const { code } = responseBody;
     if (code === "AF") alert("인증 실패");
     if (code === "VF") alert("유효성 검사 에러");
-    if (code === "NEP") alert("존재하지 않는 프로젝트");
+    if (code === "NEP") alert("존재하지 않는 게시물");
     if (code === "EF") alert("비어있는 파일");
     if (code === "FSE") alert("파일 저장 에러");
     if (code === "DBE") alert("데이터베이스 에러");
     if (code !== "SU") return;
 
-    alert("프로젝트를 성공적으로 수정하였습니다.");
-    router.push(`/project/detail/${id}`);
+    alert("게시물을 성공적으로 수정하였습니다.");
+    router.push(`/blog/detail/${id}`);
   };
 
-  const deleteProjectResponse = (responseBody: DeleteProjectResponseDto | ResponseDto | null) => {
+  const deletePostResponse = (responseBody: DeletePostResponseDto | ResponseDto | null) => {
     if (!responseBody) return;
     const { code } = responseBody;
     if (code === "AF") alert("인증 실패");
-    if (code === "NEP") alert("존재하지 않는 프로젝트");
+    if (code === "NEP") alert("존재하지 않는 게시물");
     if (code === "DBE") alert("데이터베이스 에러");
     if (code !== "SU") return;
 
-    alert("프로젝트를 성공적으로 삭제하였습니다.");
+    alert("게시물을 성공적으로 삭제하였습니다.");
     router.push("/");
   };
 
   const onUpdateButtonClickHandler = () => {
     const data: FormData = new FormData();
-    data.append("name", name);
+    data.append("title", title);
     data.append("themeColor", themeColor);
-    data.append("description", description);
+    data.append("tags", tags);
     data.append("content", content);
     if (thumbnailFile) data.append("thumbnailFile", thumbnailFile);
     for (const resourceFile of resourceFiles) {
       data.append("resourceFiles", resourceFile);
     }
 
-    putProjectRequest(id, data, apiKey).then(putProjectResponse);
+    putPostRequest(parseInt(id), data, apiKey).then(putPostResponse);
   };
 
   const onDeleteButtonClickHandler = () => {
-    deleteProjectRequest(id, apiKey).then(deleteProjectResponse);
+    deletePostRequest(parseInt(id), apiKey).then(deletePostResponse);
   };
 
-  const getProjectResponse = (responseBody: GetProjectResponseDto | ResponseDto | null) => {
+  const getPostResponse = (responseBody: GetPostResponseDto | ResponseDto | null) => {
     if (!responseBody) {
       router.push("/");
       return;
     }
     const { code } = responseBody;
-    if (code === "NEP") alert("존재하지 않는 프로젝트");
+    if (code === "NEP") alert("존재하지 않는 게시물");
     if (code === "DBE") alert("데이터베이스 에러");
     if (code !== "SU") {
       router.push("/");
       return;
     }
 
-    const { name, thumbnail, themeColor, description, content, resourceList } = responseBody as GetProjectResponseDto;
-    setName(name);
+    const { title, thumbnail, themeColor, tags, content, resourceList } = responseBody as GetPostResponseDto;
+    setTitle(title);
     setThemeColor(themeColor);
-    setDescription(description);
+    setTags(tags.join(", "));
+    setTagArray(tags);
     setContent(content);
     if (thumbnail) {
       setThumbnailPreview(thumbnail);
@@ -203,7 +206,7 @@ export default function ProjectUpdatePage() {
   };
 
   useEffect(() => {
-    getProjectRequest(id).then(getProjectResponse);
+    getPostRequest(parseInt(id)).then(getPostResponse);
   }, [id]);
 
   useEffect(() => {
@@ -214,7 +217,7 @@ export default function ProjectUpdatePage() {
 
   return (
     <div className={styles["container"]}>
-      <h1 className={styles["header"]}>project update</h1>
+      <h1 className={styles["header"]}>post update</h1>
       <div className={styles["main"]}>
         <div className={styles["main-top"]}>
           <div className={styles["main-top-left"]}>
@@ -224,14 +227,14 @@ export default function ProjectUpdatePage() {
             <input id="api-key-input" type="password" value={apiKey} onChange={onApiKeyChangeHandler} />
             <label className={styles["main-top-left-label"]}>id</label>
             <input type="text" value={id} disabled />
-            <label className={styles["main-top-left-label"]} htmlFor="name-input">
-              name
+            <label className={styles["main-top-left-label"]} htmlFor="title-input">
+              title
             </label>
-            <input id="name-input" type="text" value={name} onChange={onNameChangeHandler} />
-            <label className={styles["main-top-left-label"]} htmlFor="description-input">
-              description
+            <input id="title-input" type="text" value={title} onChange={onTitleChangeHandler} />
+            <label className={styles["main-top-left-label"]} htmlFor="tags-input">
+              tags
             </label>
-            <input id="description-input" type="text" value={description} onChange={onDescriptionChangeHandler} />
+            <input id="tags-input" type="text" value={tags} onChange={onTagsChangeHandler} />
             <div className={styles["theme-color-input-container"]}>
               <label className={styles["main-top-left-label-theme-color"]} htmlFor="theme-color-input">
                 theme color
@@ -262,8 +265,14 @@ export default function ProjectUpdatePage() {
                   <input id="thumbnail-input" type="file" accept="image/*" style={{ display: "none" }} onChange={onThumbnailChangeHandler} />
                 </div>
                 <div className={styles["preview-info"]}>
-                  <input value={name} className={styles["preview-name"]} onChange={onNameChangeHandler} />
-                  <input value={description} className={styles["preview-description"]} onChange={onDescriptionChangeHandler} />
+                  <input value={title} className={styles["preview-title"]} onChange={onTitleChangeHandler} />
+                  <ul className={styles["preview-tags"]}>
+                    {tagArray?.map((tag) => (
+                      <li className={styles["preview-tag"]} key={tag}>
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
               <div className={styles["preview-button-container"]}>
@@ -277,7 +286,7 @@ export default function ProjectUpdatePage() {
                   onTouchEnd={onUpdateButtonMouseLeaveHandler}
                 >
                   <p className={styles["preview-button-text"]} id="preview-update-button-text">
-                    upate project
+                    upate post
                   </p>
                   <div className={styles["preview-button-icon-wrapper"]}>
                     <GoArrowUpRight className={styles["preview-button-icon"]} id="preview-update-button-icon" />
@@ -294,7 +303,7 @@ export default function ProjectUpdatePage() {
                   onTouchEnd={onDeleteButtonMouseLeaveHandler}
                 >
                   <p className={styles["preview-button-text"]} id="preview-delete-button-text">
-                    delete project
+                    delete post
                   </p>
                   <div className={styles["preview-button-icon-wrapper"]}>
                     <GoArrowUpRight className={styles["preview-button-icon"]} id="preview-delete-button-icon" />

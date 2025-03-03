@@ -1,0 +1,68 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.875rem;
+}
+
+.not-loading {
+  font-size: 1.25rem;
+  font-weight: 300;
+  letter-spacing: -0.05em;
+}
+
+@media screen and (max-width: 110em) {
+  .container {
+    gap: 4rem;
+  }
+
+  .content {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .not-loading {
+    font-size: 1.125rem;
+  }
+}
+
+@media screen and (max-width: 80em) {
+  .container {
+    gap: 3rem;
+  }
+
+  .content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.125rem;
+  }
+
+  .not-loading {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 50em) {
+  .container {
+    gap: 2rem;
+  }
+
+  .content {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media screen and (max-width: 35em) {
+  .container {
+    gap: 1.5rem;
+  }
+
+  .content {
+    gap: 1rem;
+  }
+}
