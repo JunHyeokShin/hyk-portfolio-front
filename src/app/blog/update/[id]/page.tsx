@@ -153,7 +153,7 @@ export default function PostUpdatePage() {
     if (code !== "SU") return;
 
     alert("게시물을 성공적으로 삭제하였습니다.");
-    router.push("/");
+    router.push("/blog");
   };
 
   const onUpdateButtonClickHandler = () => {
@@ -176,14 +176,14 @@ export default function PostUpdatePage() {
 
   const getPostResponse = (responseBody: GetPostResponseDto | ResponseDto | null) => {
     if (!responseBody) {
-      router.push("/");
+      router.push("/blog");
       return;
     }
     const { code } = responseBody;
     if (code === "NEP") alert("존재하지 않는 게시물");
     if (code === "DBE") alert("데이터베이스 에러");
     if (code !== "SU") {
-      router.push("/");
+      router.push("/blog");
       return;
     }
 
