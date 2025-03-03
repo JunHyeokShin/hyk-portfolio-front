@@ -10,6 +10,7 @@ import {
 } from "./response/project";
 import {
   DeletePostResponseDto,
+  GetNextIdResponseDto,
   GetPostContentResponseDto,
   GetPostListResponseDto,
   GetPostResponseDto,
@@ -132,6 +133,7 @@ export const deleteProjectRequest = async (id: string, apiKey: string) => {
 const GET_POST_LIST_URL = () => `${API_DOMAIN}/post`;
 const GET_POST_URL = (id: number) => `${API_DOMAIN}/post/${id}`;
 const GET_POST_CONTENT_URL = (id: number) => `${API_DOMAIN}/post/${id}/content`;
+const GET_NEXT_ID_URL = () => `${API_DOMAIN}/post/next-id`;
 const POST_POST_URL = () => `${API_DOMAIN}/post`;
 const PUT_POST_URL = (id: number) => `${API_DOMAIN}/post/${id}`;
 const DELETE_POST_URL = (id: number) => `${API_DOMAIN}/post/${id}`;
@@ -172,6 +174,21 @@ export const getPostContentRequest = async (id: number) => {
     .then((response) => {
       const resopnseBody: GetPostContentResponseDto = response.data;
       return resopnseBody;
+    })
+    .catch((error) => {
+      if (!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+export const getNextIdRequest = async () => {
+  const result = await axios
+    .get(GET_NEXT_ID_URL())
+    .then((response) => {
+      const responseBody: GetNextIdResponseDto = response.data;
+      return responseBody;
     })
     .catch((error) => {
       if (!error.response) return null;

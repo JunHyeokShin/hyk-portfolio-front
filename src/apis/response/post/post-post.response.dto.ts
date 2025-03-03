@@ -1,3 +1,5 @@
 import ResponseDto from "../response.dto";
 
-export default interface PostPostResponseDto extends ResponseDto {}
+export default interface PostPostResponseDto extends ResponseDto {
+  id: number;
+}
