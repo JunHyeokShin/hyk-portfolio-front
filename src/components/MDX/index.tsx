@@ -62,11 +62,6 @@ const components: MDXComponents = {
     </li>
   ),
   hr: () => <hr className={styles["hr"]} />,
-  pre: (props) => (
-    <pre className={styles["pre"]} {...props}>
-      {props.children}
-    </pre>
-  ),
   code: (props) => (
     <code className={styles["code"]} {...props}>
       {props.children}

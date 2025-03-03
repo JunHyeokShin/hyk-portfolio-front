@@ -3,25 +3,25 @@
 
   font-size: 1.877rem;
   font-weight: 300;
-  line-height: 110%;
+  line-height: 120%;
   letter-spacing: -0.01em;
 }
 
 .h1 {
-  margin: -2.5rem 0 2.5rem -2.5rem;
+  margin-bottom: 2.5rem;
 
   font-size: 7.95rem;
   font-weight: 300;
-  line-height: 110%;
+  line-height: 120%;
   letter-spacing: -0.05em;
 }
 
 .h2 {
-  margin: 3rem 0 1.25rem -2rem;
+  margin: 3rem 0 1.25rem 0;
 
   font-size: 4.914rem;
   font-weight: 300;
-  line-height: 110%;
+  line-height: 120%;
   letter-spacing: -0.05em;
 }
 
@@ -30,7 +30,7 @@
 
   font-size: 3.863rem;
   font-weight: 300;
-  line-height: 110%;
+  line-height: 120%;
   letter-spacing: -0.05em;
 }
 
@@ -39,7 +39,7 @@
 
   font-size: 3.037rem;
   font-weight: 300;
-  line-height: 110%;
+  line-height: 120%;
   letter-spacing: -0.05em;
 }
 
@@ -48,7 +48,7 @@
 
   font-size: 2.387rem;
   font-weight: 300;
-  line-height: 110%;
+  line-height: 120%;
   letter-spacing: -0.05em;
 }
 
@@ -57,7 +57,7 @@
 
   font-size: 1.877rem;
   font-weight: 300;
-  line-height: 110%;
+  line-height: 120%;
   letter-spacing: -0.05em;
 }
 
@@ -92,49 +92,6 @@
   border: 0.05rem inset;
 }
 
-.pre {
-  margin-bottom: 1.25rem;
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-
-  overflow: auto;
-  background: var(--gunmetal);
-  color: var(--gray-100);
-
-  & code {
-    border-radius: 0;
-    padding: 0;
-
-    background-color: inherit;
-    color: inherit;
-    font-size: 1.476rem;
-    font-weight: 200;
-    line-height: inherit;
-    letter-spacing: -0.05em;
-  }
-
-  &::-webkit-scrollbar {
-    width: 0;
-    height: 1rem;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 1rem;
-    border-width: 0.35rem;
-    border-style: solid;
-    border-color: var(--gunmetal);
-
-    background-color: var(--gray-100);
-    visibility: hidden;
-  }
-
-  &:active::-webkit-scrollbar-thumb,
-  &:focus::-webkit-scrollbar-thumb,
-  &:hover::-webkit-scrollbar-thumb {
-    visibility: visible;
-  }
-}
-
 .code {
   border-radius: 0.2em;
   padding: 0 0.1em;
@@ -142,6 +99,7 @@
   background-color: var(--gray-100);
   color: var(--red);
   font-size: 0.85em;
+  font-weight: 400;
   line-height: 100%;
   letter-spacing: -0.05em;
 }
@@ -168,13 +126,13 @@
   }
 
   .h1 {
-    margin: calc(-2.5rem * 0.875) 0 calc(2.5rem * 0.875) calc(-2.5rem * 0.875);
+    margin-bottom: calc(2.5rem * 0.875);
 
     font-size: calc(7.95rem * 0.875);
   }
 
   .h2 {
-    margin: calc(3rem * 0.875) 0 calc(1.25rem * 0.875) calc(-2rem * 0.875);
+    margin: calc(3rem * 0.875) 0 calc(1.25rem * 0.875) 0;
 
     font-size: calc(4.914rem * 0.875);
   }
@@ -229,25 +187,6 @@
     border: calc(0.05rem * 0.875) inset;
   }
 
-  .pre {
-    margin-bottom: calc(1.25rem * 0.875);
-    border-radius: calc(0.5rem * 0.875);
-    padding: calc(1.5rem * 0.875);
-
-    & code {
-      font-size: calc(1.476rem * 0.875);
-    }
-
-    &::-webkit-scrollbar {
-      height: calc(1rem * 0.875);
-    }
-
-    &::-webkit-scrollbar-thumb {
-      border-radius: calc(1rem * 0.875);
-      border-width: calc(0.35rem * 0.875);
-    }
-  }
-
   .img {
     margin: 0 auto calc(1.25rem * 0.875) auto;
   }
@@ -266,13 +205,13 @@
   }
 
   .h1 {
-    margin: calc(-2.5rem * 0.75) 0 calc(2.5rem * 0.75) calc(-2.5rem * 0.75);
+    margin-bottom: calc(2.5rem * 0.75);
 
     font-size: calc(7.95rem * 0.75);
   }
 
   .h2 {
-    margin: calc(3rem * 0.75) 0 calc(1.25rem * 0.75) calc(-2rem * 0.75);
+    margin: calc(3rem * 0.75) 0 calc(1.25rem * 0.75) 0;
 
     font-size: calc(4.914rem * 0.75);
   }
@@ -327,25 +266,6 @@
     border: calc(0.05rem * 0.75) inset;
   }
 
-  .pre {
-    margin-bottom: calc(1.25rem * 0.75);
-    border-radius: calc(0.5rem * 0.75);
-    padding: calc(1.5rem * 0.75);
-
-    & code {
-      font-size: calc(1.476rem * 0.75);
-    }
-
-    &::-webkit-scrollbar {
-      height: calc(1rem * 0.75);
-    }
-
-    &::-webkit-scrollbar-thumb {
-      border-radius: calc(1rem * 0.75);
-      border-width: calc(0.35rem * 0.75);
-    }
-  }
-
   .img {
     margin: 0 auto calc(1.25rem * 0.75) auto;
   }
@@ -364,7 +284,7 @@
   }
 
   .h1 {
-    margin: 0 0 calc(2.5rem * 0.625) 0;
+    margin-bottom: calc(2.5rem * 0.625);
 
     font-size: calc(7.95rem * 0.625);
   }
@@ -425,25 +345,6 @@
     border: calc(0.05rem * 0.625) inset;
   }
 
-  .pre {
-    margin-bottom: calc(1.25rem * 0.625);
-    border-radius: calc(0.5rem * 0.625);
-    padding: calc(1.5rem * 0.625);
-
-    & code {
-      font-size: calc(1.476rem * 0.625);
-    }
-
-    &::-webkit-scrollbar {
-      height: calc(1rem * 0.625);
-    }
-
-    &::-webkit-scrollbar-thumb {
-      border-radius: calc(1rem * 0.625);
-      border-width: calc(0.35rem * 0.625);
-    }
-  }
-
   .img {
     margin: 0 auto calc(1.25rem * 0.625) auto;
   }
@@ -462,7 +363,7 @@
   }
 
   .h1 {
-    margin: 0 0 calc(2.5rem * 0.5625) 0;
+    margin-bottom: calc(2.5rem * 0.5625);
 
     font-size: calc(6.25rem * 0.5625);
   }
@@ -521,25 +422,6 @@
   .hr {
     margin-bottom: calc(2rem * 0.5625);
     border: calc(0.05rem * 0.5625) inset;
-  }
-
-  .pre {
-    margin-bottom: calc(1.25rem * 0.5625);
-    border-radius: calc(0.5rem * 0.5625);
-    padding: calc(1.5rem * 0.5625);
-
-    & code {
-      font-size: calc(1.476rem * 0.5625);
-    }
-
-    &::-webkit-scrollbar {
-      height: calc(1rem * 0.5625);
-    }
-
-    &::-webkit-scrollbar-thumb {
-      border-radius: calc(1rem * 0.5625);
-      border-width: calc(0.35rem * 0.5625);
-    }
   }
 
   .img {
