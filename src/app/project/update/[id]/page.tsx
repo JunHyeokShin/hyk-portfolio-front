@@ -128,7 +128,7 @@ export default function ProjectUpdatePage() {
   };
 
   const putProjectResponse = (responseBody: PutProjectResponseDto | ResponseDto | null) => {
-    if (!responseBody) return false;
+    if (!responseBody) return;
     const { code } = responseBody;
     if (code === "AF") alert("인증 실패");
     if (code === "VF") alert("유효성 검사 에러");
@@ -143,7 +143,7 @@ export default function ProjectUpdatePage() {
   };
 
   const deleteProjectResponse = (responseBody: DeleteProjectResponseDto | ResponseDto | null) => {
-    if (!responseBody) return false;
+    if (!responseBody) return;
     const { code } = responseBody;
     if (code === "AF") alert("인증 실패");
     if (code === "NEP") alert("존재하지 않는 프로젝트");
@@ -151,7 +151,7 @@ export default function ProjectUpdatePage() {
     if (code !== "SU") return;
 
     alert("프로젝트를 성공적으로 삭제하였습니다.");
-    router.push(`/`);
+    router.push("/");
   };
 
   const onUpdateButtonClickHandler = () => {
@@ -173,12 +173,15 @@ export default function ProjectUpdatePage() {
   };
 
   const getProjectResponse = (responseBody: GetProjectResponseDto | ResponseDto | null) => {
-    if (!responseBody) return;
+    if (!responseBody) {
+      router.push("/");
+      return;
+    }
     const { code } = responseBody;
-    if (code === "NEP") alert("존재하지 않는 게시물");
+    if (code === "NEP") alert("존재하지 않는 프로젝트");
     if (code === "DBE") alert("데이터베이스 에러");
     if (code !== "SU") {
-      router.push(`/`);
+      router.push("/");
       return;
     }
 
@@ -219,10 +222,8 @@ export default function ProjectUpdatePage() {
               api key
             </label>
             <input id="api-key-input" type="password" value={apiKey} onChange={onApiKeyChangeHandler} />
-            <label className={styles["main-top-left-label"]} htmlFor="id-input">
-              id
-            </label>
-            <input id="id-input" type="text" value={id} disabled />
+            <label className={styles["main-top-left-label"]}>id</label>
+            <input type="text" value={id} disabled />
             <label className={styles["main-top-left-label"]} htmlFor="name-input">
               name
             </label>
