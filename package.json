@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
-    "axios": "^1.8.1",
+    "axios": "^1.8.2",
     "gsap": "^3.12.7",
-    "lenis": "^1.1.22",
+    "lenis": "^1.2.3",
     "next": "15.1.7",
     "next-mdx-remote": "^5.0.0",
     "react": "^19.0.0",

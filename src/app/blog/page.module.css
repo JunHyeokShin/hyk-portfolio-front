@@ -5,8 +5,8 @@
 }
 
 .content {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 1.875rem;
 }
 
@@ -22,7 +22,6 @@
   }
 
   .content {
-    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
   }
 
@@ -37,7 +36,6 @@
   }
 
   .content {
-    grid-template-columns: repeat(2, 1fr);
     gap: 1.125rem;
   }
 
@@ -52,7 +50,6 @@
   }
 
   .content {
-    grid-template-columns: repeat(1, 1fr);
     gap: 2rem;
   }
 }
