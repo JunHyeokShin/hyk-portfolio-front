@@ -14,25 +14,25 @@ interface Props {
   post: PostListItem;
 }
 
-export default function PostCard({ post }: Props) {
+export default function ProjectCard({ post }: Props) {
   const revealAnimation = useRef<GSAPTimeline>(null);
 
   const onMouseEnterHandler = () => {
-    gsap.to(`#post-${post.id}-thumbnail-wrapper`, { translateY: "1%", scaleY: 1.02, duration: 0.5, ease: "power2.out" });
-    gsap.to(`#post-${post.id}-thumbnail`, { scaleX: 1.1, scaleY: 1.1 / 1.02, duration: 0.5, ease: "power2.out" });
-    gsap.to(`#post-${post.id}-button`, { backgroundColor: "#ffffffff", scale: 1.03, duration: 0.5, ease: "power2.out" });
-    gsap.to(`#post-${post.id}-button-text`, { color: "#1a1a1a", duration: 0.5, ease: "power2.out" });
-    gsap.to(`#post-${post.id}-button-icon`, { top: "-1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
-    gsap.to(`#post-${post.id}-button-icon-second`, { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
+    gsap.to(`#thumbnail-wrapper-${post.id}`, { translateY: "1%", scaleY: 1.02, duration: 0.5, ease: "power2.out" });
+    gsap.to(`#thumbnail-${post.id}`, { scaleX: 1.1, scaleY: 1.1 / 1.02, duration: 0.5, ease: "power2.out" });
+    gsap.to(`#button-${post.id}`, { backgroundColor: "#ffffffff", scale: 1.03, duration: 0.5, ease: "power2.out" });
+    gsap.to(`#button-text-${post.id}`, { color: "#1a1a1a", duration: 0.5, ease: "power2.out" });
+    gsap.to(`#button-icon-${post.id}`, { top: "-1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
+    gsap.to(`#button-icon-second-${post.id}`, { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
   };
 
   const onMouseLeaveHandler = () => {
-    gsap.to(`#post-${post.id}-thumbnail-wrapper`, { translateY: 0, scaleY: 1, duration: 0.5, ease: "power2.out" });
-    gsap.to(`#post-${post.id}-thumbnail`, { scale: 1, duration: 0.5, ease: "power2.out" });
-    gsap.to(`#post-${post.id}-button`, { backgroundColor: "#00000000", scale: 1, duration: 0.5, ease: "power2.out" });
-    gsap.to(`#post-${post.id}-button-text`, { color: "#ffffff", duration: 0.5, ease: "power2.out" });
-    gsap.to(`#post-${post.id}-button-icon`, { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
-    gsap.to(`#post-${post.id}-button-icon-second`, { top: "1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
+    gsap.to(`#thumbnail-wrapper-${post.id}`, { translateY: 0, scaleY: 1, duration: 0.5, ease: "power2.out" });
+    gsap.to(`#thumbnail-${post.id}`, { scale: 1, duration: 0.5, ease: "power2.out" });
+    gsap.to(`#button-${post.id}`, { backgroundColor: "#00000000", scale: 1, duration: 0.5, ease: "power2.out" });
+    gsap.to(`#button-text-${post.id}`, { color: "#ffffff", duration: 0.5, ease: "power2.out" });
+    gsap.to(`#button-icon-${post.id}`, { top: "0", left: "0", duration: 0.5, ease: "power1.out" });
+    gsap.to(`#button-icon-second-${post.id}`, { top: "1.5rem", left: "0", duration: 0.5, ease: "power1.out" });
   };
 
   useGSAP(() => {
@@ -55,19 +55,19 @@ export default function PostCard({ post }: Props) {
       onTouchEnd={onMouseLeaveHandler}
     >
       <div className={styles["post-info-box"]}>
-        <div className={styles["post-thumbnail-wrapper"]} id={`post-${post.id}-thumbnail-wrapper`}>
+        <div className={styles["post-thumbnail-wrapper"]} id={`thumbnail-wrapper-${post.id}`}>
           <Image
             src={post.thumbnail ? post.thumbnail : "/resources/default-thumbnail.png"}
-            alt={`${post.id}`}
+            alt={post.title}
             width={1600}
             height={1200}
             className={styles["post-thumbnail"]}
-            id={`post-${post.id}-thumbnail`}
+            id={`thumbnail-${post.id}`}
           />
         </div>
         <div className={styles["post-info"]}>
           <h2 className={styles["post-title"]}>{post.title}</h2>
-          <ul className={styles["post-tags"]}>
+          <ul>
             {post.tags.map((tag) => (
               <li className={styles["post-tag"]} key={tag}>
                 {tag}
@@ -77,15 +77,16 @@ export default function PostCard({ post }: Props) {
         </div>
       </div>
       <div className={styles["post-button-container"]}>
-        <button className={styles["post-button"]} id={`post-${post.id}-button`}>
-          <p className={styles["post-button-text"]} id={`post-${post.id}-button-text`}>
+        <button className={styles["post-button"]} id={`button-${post.id}`}>
+          <p className={styles["post-button-text"]} id={`button-text-${post.id}`}>
             view post
           </p>
           <div className={styles["post-button-icon-wrapper"]}>
-            <GoArrowUpRight className={styles["post-button-icon"]} id={`post-${post.id}-button-icon`} />
-            <GoArrowUpRight className={styles["post-button-icon-second"]} id={`post-${post.id}-button-icon-second`} />
+            <GoArrowUpRight className={styles["post-button-icon"]} id={`button-icon-${post.id}`} />
+            <GoArrowUpRight className={styles["post-button-icon-second"]} id={`button-icon-second-${post.id}`} />
           </div>
         </button>
+        <p className={styles["post-write-datetime"]}>{post.createdAt.slice(0, 10)}</p>
       </div>
     </Link>
   );

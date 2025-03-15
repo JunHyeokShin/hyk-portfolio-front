@@ -14,6 +14,7 @@ import {
   GetPostContentResponseDto,
   GetPostListResponseDto,
   GetPostResponseDto,
+  GetSearchPostListResponseDto,
   PostPostResponseDto,
   PutPostResponseDto,
 } from "./response/post";
@@ -134,6 +135,7 @@ const GET_POST_LIST_URL = () => `${API_DOMAIN}/post`;
 const GET_POST_URL = (id: number) => `${API_DOMAIN}/post/${id}`;
 const GET_POST_CONTENT_URL = (id: number) => `${API_DOMAIN}/post/${id}/content`;
 const GET_NEXT_ID_URL = () => `${API_DOMAIN}/post/next-id`;
+const GET_SEARCH_POST_LIST_URL = (searchWord: string) => `${API_DOMAIN}/post/search/${searchWord}`;
 const POST_POST_URL = () => `${API_DOMAIN}/post`;
 const PUT_POST_URL = (id: number) => `${API_DOMAIN}/post/${id}`;
 const DELETE_POST_URL = (id: number) => `${API_DOMAIN}/post/${id}`;
@@ -188,6 +190,21 @@ export const getNextIdRequest = async () => {
     .get(GET_NEXT_ID_URL())
     .then((response) => {
       const responseBody: GetNextIdResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      if (!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+export const getSearchPostListRequest = async (searchWord: string) => {
+  const result = await axios
+    .get(GET_SEARCH_POST_LIST_URL(searchWord))
+    .then((response) => {
+      const responseBody: GetSearchPostListResponseDto = response.data;
       return responseBody;
     })
     .catch((error) => {

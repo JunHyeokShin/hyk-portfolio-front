@@ -37,20 +37,23 @@
 
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
+  gap: 0.25rem;
 
   color: var(--white);
 }
 
 .post-title {
-  font-size: 1.875rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  font-size: 1.5rem;
   font-weight: 400;
   line-height: 110%;
   letter-spacing: -0.05em;
-}
-
-.post-tags {
-  display: block;
 }
 
 .post-tag {
@@ -64,12 +67,17 @@
   background-color: rgba(255, 255, 255, 0.1);
 
   color: var(--gray-300);
-  line-height: 110%;
+  font-size: 0.875rem;
+  line-height: 100%;
   letter-spacing: -0.05em;
 }
 
 .post-button-container {
   padding: 1.25rem 1.875rem 1.875rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
 }
 
 .post-button {
@@ -121,4 +129,9 @@
 
   color: var(--yellow);
   font-size: 1.5rem;
+}
+
+.post-write-datetime {
+  color: var(--gray-300);
+  font-size: 0.75rem;
 }
