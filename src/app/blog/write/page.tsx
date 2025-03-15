@@ -215,8 +215,8 @@ export default function PostWritePage() {
                   <input id="thumbnail-input" type="file" accept="image/*" style={{ display: "none" }} onChange={onThumbnailChangeHandler} />
                 </div>
                 <div className={styles["preview-info"]}>
-                  <input value={title} className={styles["preview-title"]} onChange={onTitleChangeHandler} />
-                  <ul className={styles["preview-tags"]}>
+                  <h2 className={styles["preview-title"]}>{title}</h2>
+                  <ul>
                     {tagArray?.map((tag) => (
                       <li className={styles["preview-tag"]} key={tag}>
                         {tag}

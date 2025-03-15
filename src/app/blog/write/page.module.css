@@ -167,18 +167,22 @@
 
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
+  gap: 0.25rem;
 }
 
 .preview-title {
-  color: var(--white);
-  font-size: 1.875rem;
-  line-height: 100%;
-  letter-spacing: -0.05em;
-}
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
-.preview-tags {
-  display: block;
+  color: var(--white);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 110%;
+  letter-spacing: -0.05em;
 }
 
 .preview-tag {
@@ -192,7 +196,8 @@
   background-color: rgba(255, 255, 255, 0.1);
 
   color: var(--gray-300);
-  line-height: 110%;
+  font-size: 0.875rem;
+  line-height: 100%;
   letter-spacing: -0.05em;
 }
 
