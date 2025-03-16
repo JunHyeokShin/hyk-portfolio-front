@@ -14,7 +14,7 @@ interface Props {
   post: PostListItem;
 }
 
-export default function ProjectCard({ post }: Props) {
+export default function PostCard({ post }: Props) {
   const revealAnimation = useRef<GSAPTimeline>(null);
 
   const onMouseEnterHandler = () => {
