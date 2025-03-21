@@ -8,14 +8,14 @@ import { PiGithubLogoLight, PiInstagramLogoLight } from "react-icons/pi";
 import styles from "./style.module.css";
 
 interface Props {
-  type: "home" | "blog";
+  type: "project" | "blog";
 }
 
 export default function Header({ type }: Props) {
   const revealAnimation = useRef<GSAPTimeline>(null);
 
   useGSAP(() => {
-    if (type === "home") {
+    if (type === "project") {
       revealAnimation.current = gsap
         .timeline()
         .to("#header", { opacity: 1, duration: 0 })
@@ -46,34 +46,34 @@ export default function Header({ type }: Props) {
       <div className={styles["header-left"]}>
         <div className="hidden-y">
           <h2 className={styles["header-left-pretitle"]} id="pretitle">
-            {type === "home" ? "my finished" : "my study"}
+            {type === "project" ? "my finished" : "my study"}
           </h2>
         </div>
         <div className="hidden-y">
           <h1 className={styles["header-left-title"]}>
             <div className={styles["header-left-title-letter"]} id="title-1">
-              {type === "home" ? "p" : "n"}
+              {type === "project" ? "p" : "n"}
             </div>
             <div className={styles["header-left-title-letter"]} id="title-2">
-              {type === "home" ? "r" : "o"}
+              {type === "project" ? "r" : "o"}
             </div>
             <div className={styles["header-left-title-letter"]} id="title-3">
-              {type === "home" ? "o" : "t"}
+              {type === "project" ? "o" : "t"}
             </div>
             <div className={styles["header-left-title-letter"]} id="title-4">
-              {type === "home" ? "j" : "e"}
+              {type === "project" ? "j" : "e"}
             </div>
             <div className={styles["header-left-title-letter"]} id="title-5">
-              {type === "home" ? "e" : "s"}
+              {type === "project" ? "e" : "s"}
             </div>
             <div className={styles["header-left-title-letter"]} id="title-6">
-              {type === "home" && "c"}
+              {type === "project" && "c"}
             </div>
             <div className={styles["header-left-title-letter"]} id="title-7">
-              {type === "home" && "t"}
+              {type === "project" && "t"}
             </div>
             <div className={styles["header-left-title-letter"]} id="title-8">
-              {type === "home" && "s"}
+              {type === "project" && "s"}
             </div>
           </h1>
         </div>

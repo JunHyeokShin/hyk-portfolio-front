@@ -4,6 +4,7 @@ import { GetPostListResponseDto } from "@/apis/response/post";
 import FadeIn from "@/components/FadeIn";
 import Header from "@/components/Header";
 import PostCard from "@/components/PostCard";
+import SecretNavigation from "@/components/SecretNavigation";
 import styles from "./page.module.css";
 
 function getPostListResponse(responseBody: GetPostListResponseDto | ResponseDto | null) {
@@ -18,6 +19,7 @@ export default async function BlogHome() {
 
   return (
     <main className={styles["container"]}>
+      <SecretNavigation type="post" />
       <Header type="blog" />
       {postList ? (
         <section className={styles["content"]}>

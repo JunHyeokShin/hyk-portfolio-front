@@ -2,6 +2,7 @@ import { getPostContentRequest } from "@/apis";
 import { ResponseDto } from "@/apis/response";
 import { GetPostContentResponseDto } from "@/apis/response/post";
 import MDX from "@/components/MDX";
+import SecretNavigation from "@/components/SecretNavigation";
 import styles from "./page.module.css";
 
 interface Params {
@@ -18,13 +19,16 @@ function getPostContentResponse(responseBody: GetPostContentResponseDto | Respon
 }
 
 export default async function PostDetailPage({ params }: Params) {
-  const id = parseInt((await params).id);
-  const { code, tags, content } = await getPostContentRequest(id).then(getPostContentResponse);
+  const id = (await params).id;
+  const { code, tags, content } = await getPostContentRequest(parseInt(id)).then(getPostContentResponse);
 
   return (
     <>
       {code === "SU" ? (
-        <MDX content={content} />
+        <>
+          <SecretNavigation type="post" id={id} />
+          <MDX content={content} />
+        </>
       ) : code === "NEP" ? (
         <p className={styles["not-loading"]}>존재하지 않는 게시물입니다.</p>
       ) : (

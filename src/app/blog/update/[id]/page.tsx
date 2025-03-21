@@ -267,8 +267,8 @@ export default function PostUpdatePage() {
                 <div className={styles["preview-info"]}>
                   <h2 className={styles["preview-title"]}>{title}</h2>
                   <ul>
-                    {tagArray?.map((tag) => (
-                      <li className={styles["preview-tag"]} key={tag}>
+                    {tagArray?.map((tag, index) => (
+                      <li className={styles["preview-tag"]} key={index}>
                         {tag}
                       </li>
                     ))}

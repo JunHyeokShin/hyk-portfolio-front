@@ -26,20 +26,18 @@ export default async function PostSearchPage({ params }: Params) {
       <Header type="blog" />
       {searchList ? (
         searchList.length > 0 ? (
-          <>
-            <div className={styles["content-container"]}>
-              <FadeIn duration={1} delay={0.2}>
-                <p className={styles["search-result-text"]}>
-                  <strong>'{searchWord}'</strong>에 대한 검색 결과({searchList.length}):
-                </p>
-              </FadeIn>
-              <section className={styles["content"]}>
-                {searchList.map((post) => (
-                  <PostCard post={post} key={post.id} />
-                ))}
-              </section>
-            </div>
-          </>
+          <div className={styles["content-container"]}>
+            <FadeIn duration={1} delay={0.2}>
+              <p className={styles["search-result-text"]}>
+                <strong>'{searchWord}'</strong>에 대한 검색 결과({searchList.length}):
+              </p>
+            </FadeIn>
+            <section className={styles["content"]}>
+              {searchList.map((post) => (
+                <PostCard post={post} key={post.id} />
+              ))}
+            </section>
+          </div>
         ) : (
           <FadeIn duration={1} delay={0.2}>
             <p className={styles["not-loading"]}>

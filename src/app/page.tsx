@@ -4,6 +4,7 @@ import { GetProjectListResponseDto } from "@/apis/response/project";
 import FadeIn from "@/components/FadeIn";
 import Header from "@/components/Header";
 import ProjectCard from "@/components/ProjectCard";
+import SecretNavigation from "@/components/SecretNavigation";
 import styles from "./page.module.css";
 
 function getProjectListResponse(responseBody: GetProjectListResponseDto | ResponseDto | null) {
@@ -18,7 +19,8 @@ export default async function Home() {
 
   return (
     <main className={styles["container"]}>
-      <Header type="home" />
+      <SecretNavigation type="project" />
+      <Header type="project" />
       {projectList ? (
         <section className={styles["content"]}>
           {projectList.map((project) => (

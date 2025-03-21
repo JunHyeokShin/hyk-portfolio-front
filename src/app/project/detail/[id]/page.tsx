@@ -2,6 +2,7 @@ import { getProjectContentRequest } from "@/apis";
 import { ResponseDto } from "@/apis/response";
 import { GetProjectContentResponseDto } from "@/apis/response/project";
 import MDX from "@/components/MDX";
+import SecretNavigation from "@/components/SecretNavigation";
 import styles from "./page.module.css";
 
 interface Params {
@@ -24,7 +25,10 @@ export default async function ProjectDetailPage({ params }: Params) {
   return (
     <>
       {code === "SU" ? (
-        <MDX content={content} />
+        <>
+          <SecretNavigation type="project" id={id} />
+          <MDX content={content} />
+        </>
       ) : code === "NEP" ? (
         <p className={styles["not-loading"]}>존재하지 않는 프로젝트입니다.</p>
       ) : (

@@ -6,9 +6,9 @@ import { useRef } from "react";
 import styles from "./style.module.css";
 
 interface Props {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   duration: number;
-  delay: number;
+  delay?: number;
 }
 
 export default function FadeIn({ children, duration, delay }: Props) {
