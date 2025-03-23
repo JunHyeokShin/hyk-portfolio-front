@@ -5,7 +5,12 @@ import FadeIn from "@/components/FadeIn";
 import Header from "@/components/Header";
 import PostCard from "@/components/PostCard";
 import SecretNavigation from "@/components/SecretNavigation";
+import { sortPostList } from "@/utils";
 import styles from "./page.module.css";
+
+interface Params {
+  searchParams: Promise<{ [key: string]: string | undefined }>;
+}
 
 function getPostListResponse(responseBody: GetPostListResponseDto | ResponseDto | null) {
   if (!responseBody || responseBody.code !== "SU") return;
@@ -14,16 +19,18 @@ function getPostListResponse(responseBody: GetPostListResponseDto | ResponseDto 
   return postList;
 }
 
-export default async function BlogHome() {
+export default async function BlogHome({ searchParams }: Params) {
+  const { sortBy = "write_datetime", order = "desc" } = await searchParams;
   const postList = await getPostListRequest().then(getPostListResponse);
+  const sortedPostList = sortPostList(sortBy, order, postList);
 
   return (
     <main className={styles["container"]}>
       <SecretNavigation type="post" />
       <Header type="blog" />
-      {postList ? (
+      {sortedPostList ? (
         <section className={styles["content"]}>
-          {postList.map((post) => (
+          {sortedPostList.map((post) => (
             <PostCard post={post} key={post.id} />
           ))}
         </section>
