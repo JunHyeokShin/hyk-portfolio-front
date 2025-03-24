@@ -21,8 +21,14 @@ export const sortPostList = (sortBy: string, order: string, postList?: PostListI
       case "title":
         comparison = a.title.localeCompare(b.title);
         break;
+      case "view_count":
+        comparison = a.viewCount - b.viewCount;
+        break;
       case "write_datetime":
         comparison = new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+        break;
+      case "update_datetime":
+        comparison = new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime();
         break;
       default:
         return 0;

@@ -4,5 +4,7 @@ export default interface PostListItem {
   thumbnail: string | null;
   themeColor: string;
   tags: string[];
+  viewCount: number;
   createdAt: string;
+  updatedAt: string;
 }
