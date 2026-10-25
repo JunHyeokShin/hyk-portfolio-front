@@ -11,6 +11,7 @@
     "api:gen": "openapi-typescript https://api.hyk-portfolio.dev/api-docs.yaml -o src/shared/api/schema.d.ts && prettier --write src/shared/api/schema.d.ts"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.104.5",
     "next": "16.4.2",
     "openapi-fetch": "^0.17.0",
     "react": "19.3.0",

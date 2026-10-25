@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { helveticaNeue, jetbrainsMono, pretendard } from "@/_app/fonts";
+import { QueryProvider } from "@/_app/query-client";
 
 export const metadata: Metadata = {
   title: {
@@ -14,7 +15,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ko" className={`${helveticaNeue.variable} ${pretendard.variable} ${jetbrainsMono.variable}`}>
-      <body>{children}</body>
+      <body>
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
   );
 }
