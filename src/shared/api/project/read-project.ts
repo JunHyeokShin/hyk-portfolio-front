@@ -1,5 +1,8 @@
 import { ApiError } from "../api-error";
 import { apiClient } from "../client";
+import type { components } from "../schema";
+
+export type ReadProjectResponse = components["schemas"]["ReadProjectResponse"];
 
 export async function readProject(slug: string, signal?: AbortSignal) {
   const { data, error, response } = await apiClient.GET("/projects/{slug}", {
