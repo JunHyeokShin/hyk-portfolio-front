@@ -13,9 +13,12 @@
   "dependencies": {
     "@tanstack/react-query": "^5.105.3",
     "next": "16.4.5",
+    "next-mdx-remote-client": "^2.1.12",
     "openapi-fetch": "^0.17.0",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@feature-sliced/steiger-plugin": "^0.8.2",

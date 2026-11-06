@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { unstable_rethrow } from "next/navigation";
 
 import { getProject } from "../api/get-project";
+import { ProjectContent } from "./project-content";
 
 export async function generateMetadata({ params }: PageProps<"/projects/[slug]">): Promise<Metadata> {
   const { slug } = await params;
@@ -20,7 +21,9 @@ export async function ProjectDetailPage({ params }: PageProps<"/projects/[slug]"
 
   return (
     <main>
-      <article>{project.content}</article>
+      <article>
+        <ProjectContent source={project.content} />
+      </article>
     </main>
   );
 }
