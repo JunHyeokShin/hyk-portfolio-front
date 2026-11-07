@@ -54,7 +54,7 @@ export function ProjectForm({ project }: { project?: ReadProjectResponse }) {
         apiKey={apiKey}
         onUpload={(url) => {
           const content = contentRef.current!;
-          content.setRangeText(`![](${url})`, content.selectionStart, content.selectionEnd, "end");
+          content.setRangeText(url, content.selectionStart, content.selectionEnd, "end");
         }}
       />
 
