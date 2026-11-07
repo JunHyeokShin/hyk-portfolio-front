@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { unstable_rethrow } from "next/navigation";
 
+import { Markdown } from "@/shared/ui/markdown";
+import { ScrollToHash } from "@/shared/ui/scroll-to-hash";
+
 import { getProject } from "../api/get-project";
-import { ProjectContent } from "./project-content";
 
 export async function generateMetadata({ params }: PageProps<"/projects/[slug]">): Promise<Metadata> {
   const { slug } = await params;
@@ -21,8 +23,9 @@ export async function ProjectDetailPage({ params }: PageProps<"/projects/[slug]"
 
   return (
     <main>
+      <ScrollToHash />
       <article>
-        <ProjectContent source={project.content} />
+        <Markdown source={project.content} />
       </article>
     </main>
   );
