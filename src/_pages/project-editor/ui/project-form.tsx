@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useRef, useState, type SubmitEvent } from "react";
+import { useRef, useState, useTransition, type SubmitEvent } from "react";
 
 import type { ReadProjectResponse } from "@/shared/api";
 
@@ -19,19 +19,29 @@ export function ProjectForm({ project }: { project?: ReadProjectResponse }) {
   const [apiKey, setApiKey] = useState("");
   const [thumbnail, setThumbnail] = useState(project?.thumbnail ?? "");
   const contentRef = useRef<HTMLTextAreaElement>(null);
-  const isBusy = [saveProject, deleteProject].some((mutation) => mutation.isPending || mutation.isSuccess);
+  const [isNavigating, startNavigation] = useTransition();
+  const isBusy = saveProject.isPending || deleteProject.isPending || isNavigating;
 
   function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = event.currentTarget;
     saveProject.mutate(
-      { apiKey, body: parseProjectForm(new FormData(event.currentTarget)) },
-      { onSuccess: ({ slug }) => router.push(`/projects/${slug}`) },
+      { apiKey, body: parseProjectForm(new FormData(form)) },
+      {
+        onSuccess: ({ slug }) => {
+          if (!project) {
+            form.reset();
+            setThumbnail("");
+          }
+          startNavigation(() => router.push(`/projects/${slug}`));
+        },
+      },
     );
   }
 
   function handleDelete(slug: string) {
     if (confirm(`delete "${slug}"?`)) {
-      deleteProject.mutate({ apiKey, slug }, { onSuccess: () => router.replace("/projects") });
+      deleteProject.mutate({ apiKey, slug }, { onSuccess: () => startNavigation(() => router.replace("/projects")) });
     }
   }
 
